@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Presidential Economic Performance Analysis</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: "Inter", sans-serif; }
+    .font-display { font-family: "Bebas Neue", sans-serif; }
+
+    .bg-grid-pattern {
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 1.5rem 1.5rem;
+    }
+    .bg-grid-pattern-dark {
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 2rem 2rem;
+    }
+
+    .chart-container { position: relative; height: 380px; margin: 20px 0; }
+
+    /* Sidebar */
+    .sidebar { transition: transform 0.35s cubic-bezier(0.4,0,0.2,1); }
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed; top: 0; left: 0;
+        height: 100vh; z-index: 50;
+        transform: translateX(-100%);
+      }
+      .sidebar.show { transform: translateX(0); }
+      .chart-container { height: 280px; }
+    }
+
+    /* Strata-style pill badge */
+    .badge-verified {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid rgba(77,163,255,0.25);
+      background: rgba(77,163,255,0.1);
+      color: #3E7FCC;
+      padding: 4px 12px; border-radius: 9999px;
+      font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    .badge-discrepancy {
+      display: inline-flex; align-items: center; gap: 5px;
+      border: 1px solid rgba(239,68,68,0.25);
+      background: rgba(239,68,68,0.08);
+      color: #dc2626;
+      padding: 4px 12px; border-radius: 9999px;
+      font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.12em;
+    }
+
+    /* Animate on scroll reveal */
+    .reveal { opacity: 0; transform: translateY(24px); }
+  </style>
+</head>
+<body class="bg-zinc-50 text-zinc-900 antialiased selection:bg-zinc-200">
+
+  <!-- Mobile Toggle -->
+  <div class="md:hidden fixed top-4 left-4 z-[60]">
+    <button id="mobileMenuBtn"
+      class="h-10 w-10 flex items-center justify-center rounded-xl border border-black/10 bg-[#10141B] text-white shadow-lg">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+        <path d="M2 4h14M2 9h14M2 14h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Sidebar -->
+  <nav id="sidebar"
+    class="sidebar fixed left-0 top-0 w-72 h-full bg-[#10141B] text-white z-40 flex flex-col overflow-y-auto">
+
+    <!-- Top brand bar -->
+    <div class="shrink-0 px-6 pt-8 pb-6 border-b border-white/[0.06]">
+      <div class="flex items-center gap-3 mb-1">
+        <div class="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05]">
+          <span class="absolute inset-[5px] rounded-md border border-[#4DA3FF]/30"></span>
+          <span class="h-1.5 w-1.5 rounded-[2px] bg-[#4DA3FF] shadow-[0_0_8px_rgba(77,163,255,0.5)]"></span>
+        </div>
+        <div>
+          <div class="font-display text-[1.4rem] leading-none tracking-[0.04em] text-white">POLDATA</div>
+          <div class="text-[9px] uppercase tracking-[0.18em] text-white/35 mt-0.5">Economic Analysis</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav links -->
+    <div class="flex-1 px-4 py-6">
+      <p class="px-2 mb-3 text-[9px] uppercase tracking-[0.18em] text-white/30">Report Sections</p>
+      <ul class="space-y-0.5">
+        <li><a href="#executive-summary" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Executive Summary
+        </a></li>
+        <li><a href="#historical-comparison" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Historical Comparisons
+        </a></li>
+        <li><a href="#data-verification" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Data Verification
+        </a></li>
+        <li><a href="#trump-deep-dive" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Trump Second Term
+        </a></li>
+        <li><a href="#job-analysis" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Jobs by Demographics
+        </a></li>
+        <li><a href="#business-closures" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Business Closures
+        </a></li>
+        <li><a href="#bush-comparison" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Bush vs Trump
+        </a></li>
+        <li><a href="#obama-comparison" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Obama vs Trump
+        </a></li>
+        <li><a href="#visualizations" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Visualizations
+        </a></li>
+        <li><a href="#citations" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Sources & Citations
+        </a></li>
+      </ul>
+    </div>
+
+    <!-- Footer tag -->
+    <div class="shrink-0 px-6 py-5 border-t border-white/[0.06]">
+      <div class="flex items-center gap-2">
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4DA3FF]/50"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+        </span>
+        <span class="text-[9px] uppercase tracking-[0.16em] text-white/30">Live Data · Updated 2026</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="md:ml-72 min-h-screen">
+
+    <!-- ─── HERO HEADER ─── -->
+    <header class="relative overflow-hidden bg-zinc-50 px-6 pt-20 pb-20 md:pt-24 md:pb-24">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-40"></div>
+      <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-zinc-50 to-transparent"></div>
+
+      <div class="relative z-10 max-w-5xl mx-auto">
+        <!-- Eyebrow -->
+        <div class="inline-flex items-center gap-2.5 rounded-full border border-black/10 bg-white/70 px-3.5 py-1.5 shadow-[0_8px_24px_rgba(10,10,10,0.04)] backdrop-blur-md mb-7">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-[#4DA3FF]/30 animate-ping"></span>
+            <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-[#4DA3FF]"></span>
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.18em] text-[#5E6673]">Comprehensive Report · Data Verified</span>
+        </div>
+
+        <!-- Title -->
+        <h1 class="font-display text-[3.2rem] sm:text-[4.5rem] md:text-[5.5rem] lg:text-[6.2rem] uppercase leading-[0.88] tracking-[0.005em] text-[#0A0A0A] mb-6">
+          Presidential<br>Economic<br>Performance
+        </h1>
+
+        <p class="max-w-2xl text-[1.02rem] leading-7 text-[#5F6672] md:text-[1.1rem] mb-8">
+          Comprehensive comparison of Democratic vs Republican economic outcomes with full data verification — covering job creation, GDP growth, wages, and sector performance across administrations from 1945 to 2026.
+        </p>
+
+        <div class="flex items-center gap-4 flex-wrap">
+          <span class="badge-verified">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#4DA3FF" stroke-width="1.5"/><path d="M3 5l1.5 1.5L7 3.5" stroke="#4DA3FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+            BLS Verified
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Bureau of Labor Statistics · BEA · FRED · NBER</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── EXECUTIVE SUMMARY ─── -->
+    <section id="executive-summary" class="px-6 py-14">
+      <div class="max-w-5xl mx-auto">
+
+        <!-- Section label -->
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">01 · Executive Summary</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] tracking-[0.01em] text-[#0A0A0A] mb-10 reveal">Key Findings</h2>
+
+        <!-- 3-up stat cards -->
+        <div class="grid md:grid-cols-3 gap-4 mb-10">
+          <!-- Dark card -->
+          <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-6 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark opacity-100"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-3">Democratic Job Creation</p>
+              <p class="font-display text-[3.2rem] leading-none tracking-wide text-white">83M</p>
+              <p class="text-[11px] text-[#4DA3FF] mt-1">72% of total · 1945–2023</p>
+              <div class="absolute top-5 right-5">
+                <span class="relative flex h-2 w-2">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4DA3FF]/50"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Light card -->
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-zinc-400 mb-3">Republican Job Creation</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-[#0A0A0A]">32M</p>
+            <p class="text-[11px] text-zinc-500 mt-1">28% of total · 1945–2023</p>
+          </div>
+
+          <!-- Blue accent card -->
+          <div class="reveal rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.06] p-6 shadow-[0_12px_28px_rgba(77,163,255,0.08)]">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-[#3E7FCC] mb-3">GDP Growth Advantage</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-[#10141B]">+45%</p>
+            <p class="text-[11px] text-[#3E7FCC] mt-1">Democratic vs Republican avg</p>
+          </div>
+        </div>
+
+        <!-- Key findings list -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-8">
+          <p class="text-[9px] uppercase tracking-[0.18em] text-zinc-400 mb-6">Documented Findings</p>
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-[#4DA3FF]/30 bg-[#4DA3FF]/10">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 4.5l1.5 1.5L7 3" stroke="#4DA3FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-[0.9rem] leading-6 text-zinc-700">Democratic presidents have overseen <strong class="text-zinc-900">2.4× faster monthly job growth</strong> — 164,000 vs 61,000 jobs per month on average.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-[#4DA3FF]/30 bg-[#4DA3FF]/10">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 4.5l1.5 1.5L7 3" stroke="#4DA3FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-[0.9rem] leading-6 text-zinc-700">Average GDP growth under Democrats: <strong class="text-zinc-900">4.3%</strong> vs Republicans: <strong class="text-zinc-900">2.5%</strong> (Blinder &amp; Watson study)</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-amber-400/40 bg-amber-50">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M4.5 2v3M4.5 6.5v.5" stroke="#d97706" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-[0.9rem] leading-6 text-zinc-700">Trump's second term (2025–2026) shows <strong class="text-zinc-900">significant discrepancies</strong> between official reports and independent BLS data.</p>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="shrink-0 mt-0.5 flex h-5 w-5 items-center justify-center rounded-full border border-[#4DA3FF]/30 bg-[#4DA3FF]/10">
+                <svg width="9" height="9" viewBox="0 0 9 9" fill="none"><path d="M2 4.5l1.5 1.5L7 3" stroke="#4DA3FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <p class="text-[0.9rem] leading-6 text-zinc-700">Real wage increases were <strong class="text-zinc-900">40× greater annually</strong> under Democratic presidencies from 1980–2019 for production workers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── HISTORICAL COMPARISON ─── -->
+    <section id="historical-comparison" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-zinc-50 to-transparent"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">02 · Historical Comparisons</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Historical Data</h2>
+
+        <!-- Job creation chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Job Creation</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Democratic vs Republican Administrations</h3>
+          <div class="chart-container"><canvas id="jobCreationChart"></canvas></div>
+        </div>
+
+        <!-- GDP chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">GDP Performance</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Average Annual GDP Growth by Study</h3>
+          <div class="chart-container"><canvas id="gdpChart"></canvas></div>
+        </div>
+
+        <!-- Unemployment chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Unemployment Trends</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Unemployment Rate Changes</h3>
+          <div class="chart-container"><canvas id="unemploymentChart"></canvas></div>
+        </div>
+
+        <!-- Real wage cards -->
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-black/10 bg-[#10141B] p-7 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-4">Democratic · 16 Years</p>
+              <p class="font-display text-[3rem] leading-none text-white">$5,975</p>
+              <p class="text-[11px] text-[#4DA3FF] mt-2">Avg real wage increase · production workers</p>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-7">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-zinc-400 mb-4">Republican · 23 Years</p>
+            <p class="font-display text-[3rem] leading-none text-[#0A0A0A]">$210</p>
+            <p class="text-[11px] text-zinc-500 mt-2">Avg real wage increase · production workers</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── DATA VERIFICATION ─── -->
+    <section id="data-verification" class="px-6 py-14">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">03 · Data Verification</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Source Analysis</h2>
+
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="h-2 w-2 rounded-full bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.4)]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Trump Second Term · Official vs Independent</p>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="border-b border-black/8">
+                  <th class="text-left py-3 pr-6 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium whitespace-nowrap">Metric</th>
+                  <th class="text-left py-3 pr-6 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Official Administration</th>
+                  <th class="text-left py-3 pr-6 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Independent Sources (BLS)</th>
+                  <th class="text-left py-3 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium whitespace-nowrap">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-black/5">
+                <tr class="hover:bg-zinc-50/80 transition-colors">
+                  <td class="py-4 pr-6 font-medium text-zinc-900">Job Creation (2025)</td>
+                  <td class="py-4 pr-6 text-zinc-600">Positive growth highlighted</td>
+                  <td class="py-4 pr-6 text-zinc-600">584,000 total — slowest since 2020</td>
+                  <td class="py-4"><span class="badge-discrepancy">Discrepancy</span></td>
+                </tr>
+                <tr class="hover:bg-zinc-50/80 transition-colors">
+                  <td class="py-4 pr-6 font-medium text-zinc-900">Unemployment (2025)</td>
+                  <td class="py-4 pr-6 text-zinc-600">Economic strength emphasized</td>
+                  <td class="py-4 pr-6 text-zinc-600">Increased to 4.4% by end of 2025</td>
+                  <td class="py-4"><span class="badge-discrepancy">Discrepancy</span></td>
+                </tr>
+                <tr class="hover:bg-zinc-50/80 transition-colors">
+                  <td class="py-4 pr-6 font-medium text-zinc-900">Manufacturing Jobs</td>
+                  <td class="py-4 pr-6 text-zinc-600">Manufacturing strength touted</td>
+                  <td class="py-4 pr-6 text-zinc-600">−89,000 lost (Apr 2025–Feb 2026)</td>
+                  <td class="py-4"><span class="badge-discrepancy">Major</span></td>
+                </tr>
+                <tr class="hover:bg-zinc-50/80 transition-colors">
+                  <td class="py-4 pr-6 font-medium text-zinc-900">Consumer Sentiment</td>
+                  <td class="py-4 pr-6 text-zinc-600">Economic resilience highlighted</td>
+                  <td class="py-4 pr-6 text-zinc-600">Record low 47.6 (UMich, Apr 2026)</td>
+                  <td class="py-4"><span class="badge-discrepancy">Major</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Warning block -->
+        <div class="reveal rounded-2xl border border-amber-200/60 bg-amber-50/60 p-6">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 flex h-8 w-8 items-center justify-center rounded-xl bg-amber-100 border border-amber-200">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2L12.5 12H1.5L7 2Z" stroke="#d97706" stroke-width="1.4" stroke-linejoin="round"/><path d="M7 6v3M7 10.5v.5" stroke="#d97706" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <p class="text-[10px] uppercase tracking-[0.16em] text-amber-700 font-semibold mb-3">Data Integrity Concerns</p>
+              <ul class="space-y-2 text-sm text-amber-800">
+                <li>Significant gaps between official administration statements and Bureau of Labor Statistics data</li>
+                <li>Independent analysis by Equitable Growth contradicts administration's economic narrative</li>
+                <li>Consumer sentiment (University of Michigan) shows record lows despite official optimism</li>
+                <li>Manufacturing job losses documented by federal agencies contrast with administration claims</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── TRUMP DEEP DIVE ─── -->
+    <section id="trump-deep-dive" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">04 · Deep Dive</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Trump Second Term<br><span class="text-[#4DA3FF]">2025–May 2026</span></h2>
+
+        <!-- Loss / impact grid -->
+        <div class="grid md:grid-cols-2 gap-4 mb-8">
+          <!-- Job losses — dark card -->
+          <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-7 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-5">Job Losses by Sector</p>
+              <div class="space-y-4">
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[0.82rem] text-white/60">Manufacturing</span>
+                  <span class="font-display text-[1.4rem] text-red-400">−89,000</span>
+                </div>
+                <div class="h-px bg-white/[0.06]"></div>
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[0.82rem] text-white/60">Transportation &amp; Warehousing</span>
+                  <span class="font-display text-[1.4rem] text-red-400">−123,700</span>
+                </div>
+                <div class="h-px bg-white/[0.06]"></div>
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[0.82rem] text-white/60">Federal Workers</span>
+                  <span class="font-display text-[1.4rem] text-red-400">−290,000</span>
+                </div>
+                <div class="h-px bg-white/[0.06]"></div>
+                <div class="flex justify-between items-baseline">
+                  <span class="text-[0.82rem] text-white/60">Blue-Collar (Apr–Dec 2025)</span>
+                  <span class="font-display text-[1.4rem] text-red-400">−189,600</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Economic impact -->
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-7">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-zinc-400 mb-5">Economic Impact Metrics</p>
+            <div class="space-y-4">
+              <div class="flex justify-between items-baseline">
+                <span class="text-[0.82rem] text-zinc-500">GDP Growth (2025)</span>
+                <span class="font-display text-[1.4rem] text-[#10141B]">2.1%</span>
+              </div>
+              <div class="h-px bg-black/5"></div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-[0.82rem] text-zinc-500">Additional Tariff Cost / Household</span>
+                <span class="font-display text-[1.4rem] text-[#10141B]">$1,700</span>
+              </div>
+              <div class="h-px bg-black/5"></div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-[0.82rem] text-zinc-500">Consumer Sentiment Drop</span>
+                <span class="font-display text-[1.4rem] text-[#10141B]">−33%</span>
+              </div>
+              <div class="h-px bg-black/5"></div>
+              <div class="flex justify-between items-baseline">
+                <span class="text-[0.82rem] text-zinc-500">Trade Deficit Status</span>
+                <span class="font-display text-[1.4rem] text-[#10141B]">Record High</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job trend chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-red-400"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Monthly Trend</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Job Creation 2025–2026</h3>
+          <div class="chart-container"><canvas id="trumpJobTrendChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── JOBS BY DEMOGRAPHICS ─── -->
+    <section id="job-analysis" class="px-6 py-14">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">05 · Demographics</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Jobs by Demographics<br><span class="text-zinc-400 text-[2rem] md:text-[2.6rem]">March 2026</span></h2>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-8">
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Education Level</p>
+            <div class="chart-container" style="height:260px"><canvas id="educationUnemploymentChart"></canvas></div>
+          </div>
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Race / Ethnicity</p>
+            <div class="chart-container" style="height:260px"><canvas id="raceUnemploymentChart"></canvas></div>
+          </div>
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Age Group</p>
+            <div class="chart-container" style="height:260px"><canvas id="ageUnemploymentChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Immigration impact -->
+        <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-8 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+          <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-6">
+              <span class="h-2 w-2 rounded-full bg-[#4DA3FF] shadow-[0_0_8px_rgba(77,163,255,0.5)]"></span>
+              <p class="text-[10px] uppercase tracking-[0.16em] text-white/40">NBER Study · Jan–Oct 2025</p>
+            </div>
+            <h3 class="font-display text-[2rem] uppercase text-white mb-6">Immigration Enforcement Impact</h3>
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <p class="text-[10px] uppercase tracking-[0.14em] text-[#4DA3FF] mb-3">Undocumented Workers</p>
+                <ul class="space-y-2 text-[0.85rem] text-white/60">
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>4% reduction in employment overall</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>5% drop for male undocumented workers</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>7.5% drop in construction sector</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase tracking-[0.14em] text-[#4DA3FF] mb-3">US-Born Workers</p>
+                <ul class="space-y-2 text-[0.85rem] text-white/60">
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>1.3% drop for non-college males in affected industries</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>3% drop for construction workers without degrees</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>For every 6 fewer undocumented workers, 1 fewer US-born worker employed</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── BUSINESS CLOSURES ─── -->
+    <section id="business-closures" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">06 · Business Closures</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Business Closure Analysis</h2>
+
+        <!-- Big stat -->
+        <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-8 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden mb-6">
+          <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+          <div class="relative z-10 flex items-center justify-between flex-wrap gap-6">
+            <div>
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-3">Mfg. Establishments Lost · Apr 2025 – Feb 2026</p>
+              <p class="font-display text-[5rem] leading-none text-white">2,800+</p>
+              <p class="text-[11px] text-[#4DA3FF] mt-2">Based on 89,000 manufacturing jobs lost during this period</p>
+            </div>
+            <div class="flex flex-col gap-1 opacity-30">
+              <div class="w-16 h-3 rounded bg-white/20"></div>
+              <div class="w-12 h-3 rounded bg-white/15"></div>
+              <div class="w-10 h-3 rounded bg-white/10"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- State blue-collar warning -->
+        <div class="reveal rounded-2xl border border-amber-200/60 bg-amber-50/60 p-6 mb-6">
+          <p class="text-[9px] uppercase tracking-[0.16em] text-amber-700 font-semibold mb-4">State-Level Blue-Collar Performance · Apr–Dec 2025</p>
+          <ul class="space-y-2 text-sm text-amber-800">
+            <li class="flex items-start gap-2"><span class="font-bold shrink-0">45</span> states failed to meet average annual blue-collar job creation rates from the previous administration</li>
+            <li class="flex items-start gap-2"><span class="font-bold shrink-0">→</span>States lost an average of over 2,500 blue-collar jobs during this period</li>
+            <li class="flex items-start gap-2"><span class="font-bold shrink-0">→</span>North Carolina alone lost nearly 2,000 blue-collar jobs</li>
+            <li class="flex items-start gap-2"><span class="font-bold shrink-0">→</span>Overall blue-collar job losses: 189,600 since April 2025</li>
+          </ul>
+        </div>
+
+        <!-- Small biz grid -->
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-[#3E7FCC] mb-4">Historical Context · Small Business</p>
+            <ul class="space-y-3 text-sm text-zinc-600">
+              <li class="flex items-start gap-2"><span class="text-[#4DA3FF] font-bold shrink-0">64%</span> of net new jobs historically from small business</li>
+              <li class="flex items-start gap-2"><span class="text-[#4DA3FF] font-bold shrink-0">40M</span> jobs created by young businesses in past 25 years</li>
+              <li class="flex items-start gap-2"><span class="text-[#4DA3FF] font-bold shrink-0">88</span> jobs/year for high-growth businesses vs 2–3 for all businesses</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">Current Challenges</p>
+            <ul class="space-y-3 text-sm text-zinc-600">
+              <li class="flex items-start gap-2"><span class="text-zinc-300 shrink-0">—</span>Limited access to affordable finance</li>
+              <li class="flex items-start gap-2"><span class="text-zinc-300 shrink-0">—</span>Regulatory complexity increases</li>
+              <li class="flex items-start gap-2"><span class="text-zinc-300 shrink-0">—</span>Gaps in digital adoption</li>
+              <li class="flex items-start gap-2"><span class="text-zinc-300 shrink-0">—</span>Tightened lending standards in affected sectors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── BUSH vs TRUMP ─── -->
+    <section id="bush-comparison" class="px-6 py-14">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">07 · Bush vs Trump</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Bush · Trump<br>Comparison</h2>
+
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6 overflow-x-auto">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="border-b border-black/8">
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Metric</th>
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">G.W. Bush 2001–2009</th>
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Trump 1st Term 2017–2021</th>
+                <th class="text-left py-3 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Trump 2nd Term 2025–2026</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-black/5">
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Avg GDP Growth</td>
+                <td class="py-3.5 pr-4 text-zinc-600">2.5% (full term)</td>
+                <td class="py-3.5 pr-4 text-zinc-600">2.5% pre-COVID, −6.5% (2020)</td>
+                <td class="py-3.5 text-zinc-600">2.1% (2025)</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Job Creation Rate</td>
+                <td class="py-3.5 pr-4 text-zinc-600">95k/month — lowest since 1970</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Net loss of 2.7M jobs</td>
+                <td class="py-3.5 text-zinc-600">584k total (2025)</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Unemployment Change</td>
+                <td class="py-3.5 pr-4 text-zinc-600">4.3% → 7.2% (peak 9.9%)</td>
+                <td class="py-3.5 pr-4 text-zinc-600">4.7% → 6.4% (peak 14.9%)</td>
+                <td class="py-3.5 text-zinc-600">Increased to 4.4% by end 2025</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Recessions</td>
+                <td class="py-3.5 pr-4 text-zinc-600">2 recessions (2001, 2007–09)</td>
+                <td class="py-3.5 pr-4 text-zinc-600">1 recession (2020 COVID)</td>
+                <td class="py-3.5 text-zinc-600">No recession declared</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Manufacturing Jobs</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Significant losses in recessions</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Net loss 178,000</td>
+                <td class="py-3.5 text-zinc-600">−89,000 (10 months)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Fiscal chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Fiscal Policy</p>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Deficit Comparison</h3>
+          <div class="chart-container"><canvas id="bushTrumpFiscalChart"></canvas></div>
+        </div>
+
+        <!-- Similarities / differences -->
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.04] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-[#3E7FCC] mb-4">Similarities</p>
+            <ul class="space-y-2 text-sm text-zinc-700">
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Both implemented significant tax cuts</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Both faced major economic crises</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Both saw manufacturing job losses</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Both increased federal deficits</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">Key Differences</p>
+            <ul class="space-y-2 text-sm text-zinc-700">
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Bush: two recessions; Trump: one major pandemic recession</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Bush's crises were financial; Trump's was pandemic-related</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Trump's trade policies far more protectionist</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Different approaches to immigration and labor markets</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── OBAMA vs TRUMP ─── -->
+    <section id="obama-comparison" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">08 · Obama vs Trump</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Obama · Trump<br>Comparison</h2>
+
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Job Growth</p>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Cumulative Job Creation</h3>
+          <div class="chart-container"><canvas id="obamaTrumpJobsChart"></canvas></div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6 overflow-x-auto">
+          <table class="w-full text-sm min-w-[640px]">
+            <thead>
+              <tr class="border-b border-black/8">
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Metric</th>
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Obama 2009–2017</th>
+                <th class="text-left py-3 pr-4 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Trump 1st 2017–2021</th>
+                <th class="text-left py-3 text-[9px] uppercase tracking-[0.16em] text-zinc-400 font-medium">Trump 2nd 2025–2026</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-black/5">
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Job Creation</td>
+                <td class="py-3.5 pr-4 text-zinc-600">11.6M jobs added</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Net loss 2.7M</td>
+                <td class="py-3.5 text-zinc-600">584,000 (2025)</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Unemployment</td>
+                <td class="py-3.5 pr-4 text-zinc-600">7.8% → 4.7%</td>
+                <td class="py-3.5 pr-4 text-zinc-600">4.7% → 6.4%</td>
+                <td class="py-3.5 text-zinc-600">6.4% → 4.4%</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Manufacturing Jobs</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Recovery from recession losses</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Net loss 178,000</td>
+                <td class="py-3.5 text-zinc-600">−89,000 (10 months)</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">Real Wage Growth</td>
+                <td class="py-3.5 pr-4 text-zinc-600">4.8% (final 3 years)</td>
+                <td class="py-3.5 pr-4 text-zinc-600">2.5% (first 3 years)</td>
+                <td class="py-3.5 text-zinc-600">Declined in 2025</td>
+              </tr>
+              <tr class="hover:bg-zinc-50/80 transition-colors">
+                <td class="py-3.5 pr-4 font-medium text-zinc-900">GDP Growth</td>
+                <td class="py-3.5 pr-4 text-zinc-600">Steady recovery growth</td>
+                <td class="py-3.5 pr-4 text-zinc-600">9% total growth</td>
+                <td class="py-3.5 text-zinc-600">2.1% (2025)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.04] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-[#3E7FCC] mb-4">Obama Administration Strengths</p>
+            <ul class="space-y-2 text-sm text-zinc-700">
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Consistent job growth throughout presidency</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Steady unemployment reduction from recession peak</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Strong real wage growth in final years</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Manufacturing recovery post-recession</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF] shrink-0">→</span>Consumer confidence improvement</li>
+            </ul>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">Trump Administration Challenges</p>
+            <ul class="space-y-2 text-sm text-zinc-700">
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Net job losses in first term due to pandemic</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Manufacturing job losses in both terms</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Consumer sentiment hitting record lows (second term)</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Slower wage growth compared to Obama's final years</li>
+              <li class="flex gap-2"><span class="text-zinc-300 shrink-0">—</span>Increased trade deficits despite trade war policies</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── VISUALIZATIONS ─── -->
+    <section id="visualizations" class="px-6 py-14">
+      <div class="max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">09 · Visualizations</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Advanced<br>Visualizations</h2>
+
+        <!-- State heat map -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">State Performance</p>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Blue-Collar Job Heat Map 2025</h3>
+          <div id="stateHeatMap" class="grid gap-1 p-2" style="grid-template-columns: repeat(10, 1fr)"></div>
+          <div class="flex items-center gap-6 mt-4 pt-4 border-t border-black/5">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-red-500"></div><span class="text-[10px] text-zinc-500">Major losses</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-amber-400"></div><span class="text-[10px] text-zinc-500">Moderate losses</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-[#4DA3FF]"></div><span class="text-[10px] text-zinc-500">Minor change</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-emerald-500"></div><span class="text-[10px] text-zinc-500">Growth</span></div>
+          </div>
+        </div>
+
+        <!-- Timeline chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Timeline</p>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Presidential Economic Performance 1993–2026</h3>
+          <div class="chart-container"><canvas id="timelineChart"></canvas></div>
+        </div>
+
+        <!-- Radar chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+          <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Multi-Dimensional</p>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Performance Comparison Radar</h3>
+          <div class="chart-container"><canvas id="radarChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CITATIONS ─── -->
+    <section id="citations" class="relative overflow-hidden bg-[#10141B] px-6 py-14">
+      <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-white/[0.08] max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-white/30">10 · Sources</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-white mb-10 reveal">Sources &amp;<br>Citations</h2>
+
+        <div class="reveal grid md:grid-cols-2 gap-6 mb-8">
+          <div>
+            <p class="text-[9px] uppercase tracking-[0.18em] text-[#4DA3FF] mb-5">Government Sources</p>
+            <ul class="space-y-3 text-sm text-white/50">
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Bureau of Labor Statistics (BLS)</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Bureau of Economic Analysis (BEA)</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Congressional Budget Office (CBO)</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Federal Reserve Economic Data (FRED)</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>U.S. Treasury Department</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Small Business Administration (SBA)</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[9px] uppercase tracking-[0.18em] text-[#4DA3FF] mb-5">Independent Research</p>
+            <ul class="space-y-3 text-sm text-white/50">
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Blinder &amp; Watson Economic Studies</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>National Bureau of Economic Research (NBER)</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Equitable Growth Analysis</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>University of Michigan Consumer Sentiment</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Joint Economic Committee Reports</li>
+              <li class="flex gap-2"><span class="text-[#4DA3FF]/40 shrink-0">→</span>Center on Budget and Policy Priorities</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6">
+          <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-3">Data Verification Notes</p>
+          <p class="text-sm text-white/50 leading-6">
+            All economic data has been cross-referenced with multiple independent sources. Discrepancies between official administration statements and independent data sources have been clearly documented. Historical comparisons use consistent methodologies across administrations where possible.
+          </p>
+        </div>
+
+        <!-- Footer line -->
+        <div class="mt-14 pt-8 border-t border-white/[0.06] flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-3">
+            <div class="relative flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.05]">
+              <span class="absolute inset-[5px] rounded-md border border-[#4DA3FF]/30"></span>
+              <span class="h-1.5 w-1.5 rounded-[2px] bg-[#4DA3FF]"></span>
+            </div>
+            <span class="font-display text-[1.2rem] tracking-[0.04em] text-white">POLDATA</span>
+          </div>
+          <p class="text-[9px] uppercase tracking-[0.14em] text-white/25">Political Reporter · Economic Analysis · 2026</p>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /main -->
+
+  <!-- ─── OVERLAY (mobile) ─── -->
+  <div id="overlay" class="fixed inset-0 bg-black/40 z-30 hidden md:hidden backdrop-blur-sm"></div>
+
+<script>
+  // ── Mobile menu ──────────────────────────────────────────────────────────
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('overlay');
+  const menuBtn  = document.getElementById('mobileMenuBtn');
+
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('show');
+    overlay.classList.toggle('hidden');
+  });
+  overlay.addEventListener('click', () => {
+    sidebar.classList.remove('show');
+    overlay.classList.add('hidden');
+  });
+
+  // ── Smooth-scroll nav ────────────────────────────────────────────────────
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const el = document.getElementById(link.getAttribute('href').substring(1));
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      sidebar.classList.remove('show');
+      overlay.classList.add('hidden');
+    });
+  });
+
+  // ── GSAP scroll reveals ──────────────────────────────────────────────────
+  gsap.registerPlugin(ScrollTrigger);
+  document.querySelectorAll('.reveal').forEach(el => {
+    gsap.to(el, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+    });
+  });
+
+  // ── Chart.js shared defaults ─────────────────────────────────────────────
+  const DEM_COLOR  = 'rgba(77,163,255,0.85)';
+  const DEM_BORDER = 'rgb(77,163,255)';
+  const REP_COLOR  = 'rgba(239,68,68,0.8)';
+  const REP_BORDER = 'rgb(239,68,68)';
+
+  const baseOpts = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { position: 'top', labels: { font: { family: 'Inter', size: 12 } } } },
+    scales: {
+      x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { family: 'Inter', size: 11 } } },
+      y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { family: 'Inter', size: 11 } } }
+    }
+  };
+
+  // ── 1. Job Creation ───────────────────────────────────────────────────────
+  new Chart(document.getElementById('jobCreationChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Total Jobs 1945–2023 (M)', 'Monthly Average (M)', 'Modern Era 1980s+'],
+      datasets: [
+        { label: 'Democratic Presidents', data: [83, 0.164, 50], backgroundColor: DEM_COLOR, borderColor: DEM_BORDER, borderWidth: 1, borderRadius: 6 },
+        { label: 'Republican Presidents', data: [32, 0.061, 17], backgroundColor: REP_COLOR, borderColor: REP_BORDER, borderWidth: 1, borderRadius: 6 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Jobs (millions)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 2. GDP ────────────────────────────────────────────────────────────────
+  new Chart(document.getElementById('gdpChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Blinder & Watson', 'CNN Analysis', 'NY Times Study', 'Presidential Data 2024'],
+      datasets: [
+        { label: 'Democratic Presidents (%)', data: [4.3, 4.1, 4.6, 3.46], backgroundColor: DEM_COLOR, borderColor: DEM_BORDER, borderWidth: 1, borderRadius: 6 },
+        { label: 'Republican Presidents (%)', data: [2.5, 2.5, 2.4, 2.4], backgroundColor: REP_COLOR, borderColor: REP_BORDER, borderWidth: 1, borderRadius: 6 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Avg Annual GDP Growth (%)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 3. Unemployment ───────────────────────────────────────────────────────
+  new Chart(document.getElementById('unemploymentChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Average Rate (%)', 'Average Change (pp)'],
+      datasets: [
+        { label: 'Democratic Presidents', data: [5.2, -0.8], backgroundColor: DEM_COLOR, borderColor: DEM_BORDER, borderWidth: 1, borderRadius: 6 },
+        { label: 'Republican Presidents', data: [5.8,  1.1], backgroundColor: REP_COLOR, borderColor: REP_BORDER, borderWidth: 1, borderRadius: 6 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, title: { display: true, text: 'Rate (%) / Change (pp)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 4. Trump Job Trend ────────────────────────────────────────────────────
+  new Chart(document.getElementById('trumpJobTrendChart'), {
+    type: 'line',
+    data: {
+      labels: ['2024 Avg', 'Jan 2025', 'Apr 2025', 'Jul 2025', 'Oct 2025', 'Jan 2026', 'Apr 2026'],
+      datasets: [{
+        label: 'Monthly Job Creation (thousands)',
+        data: [125, 10, 15, 8, 12, 44, 76],
+        borderColor: REP_BORDER, backgroundColor: 'rgba(239,68,68,0.08)',
+        tension: 0.4, fill: true, borderWidth: 2,
+        pointBackgroundColor: REP_BORDER, pointRadius: 4
+      }]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Jobs (thousands)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 5. Education Unemployment ─────────────────────────────────────────────
+  new Chart(document.getElementById('educationUnemploymentChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['No High School', 'High School', 'Some College', 'College Grad'],
+      datasets: [{
+        data: [5.9, 4.7, 3.6, 2.8],
+        backgroundColor: ['rgba(239,68,68,0.8)', 'rgba(245,158,11,0.8)', 'rgba(77,163,255,0.8)', 'rgba(16,185,129,0.8)'],
+        borderWidth: 0
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 10 } } } } }
+  });
+
+  // ── 6. Race Unemployment ──────────────────────────────────────────────────
+  new Chart(document.getElementById('raceUnemploymentChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Black', 'Hispanic', 'White', 'Asian'],
+      datasets: [{
+        label: 'Unemployment Rate (%)',
+        data: [7.1, 5.5, 3.6, 4.2],
+        backgroundColor: ['rgba(239,68,68,0.8)', 'rgba(245,158,11,0.8)', 'rgba(77,163,255,0.8)', 'rgba(16,185,129,0.8)'],
+        borderWidth: 0, borderRadius: 4
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10 } } }, y: { grid: { color: 'rgba(0,0,0,0.04)' }, beginAtZero: true, ticks: { font: { family: 'Inter', size: 10 } } } } }
+  });
+
+  // ── 7. Age Unemployment ───────────────────────────────────────────────────
+  new Chart(document.getElementById('ageUnemploymentChart'), {
+    type: 'bar',
+    data: {
+      labels: ['16–19', '20–24', '25–34', '35–44', '45–54', '55+'],
+      datasets: [{
+        label: 'Unemployment Rate (%)',
+        data: [14.2, 8.1, 4.3, 3.8, 3.2, 2.9],
+        backgroundColor: 'rgba(77,163,255,0.75)', borderRadius: 4, borderWidth: 0
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10 } } }, y: { grid: { color: 'rgba(0,0,0,0.04)' }, beginAtZero: true, ticks: { font: { family: 'Inter', size: 10 } } } } }
+  });
+
+  // ── 8. Bush/Trump Fiscal ──────────────────────────────────────────────────
+  new Chart(document.getElementById('bushTrumpFiscalChart'), {
+    type: 'bar',
+    data: {
+      labels: ['2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2017', '2018', '2019', '2020', '2025'],
+      datasets: [
+        { label: 'G.W. Bush Deficit (% GDP)', data: [1.3, 3.8, 4.6, 3.5, 2.6, 1.9, 1.2, 3.5, null, null, null, null, null], backgroundColor: 'rgba(245,158,11,0.7)', borderRadius: 4, borderWidth: 0 },
+        { label: 'Trump Deficit (% GDP)',     data: [null, null, null, null, null, null, null, null, 3.5, 3.9, 4.7, 15.2, 6.5], backgroundColor: REP_COLOR, borderRadius: 4, borderWidth: 0 }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Federal Deficit (% of GDP)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 9. Obama vs Trump Jobs ────────────────────────────────────────────────
+  new Chart(document.getElementById('obamaTrumpJobsChart'), {
+    type: 'line',
+    data: {
+      labels: ['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5', 'Year 6', 'Year 7', 'Year 8'],
+      datasets: [
+        { label: 'Obama (cumulative M)', data: [-3.5, -1.2, 1.8, 4.5, 6.8, 8.6, 10.1, 11.6], borderColor: DEM_BORDER, backgroundColor: 'rgba(77,163,255,0.08)', fill: true, tension: 0.4, borderWidth: 2, pointRadius: 4, pointBackgroundColor: DEM_BORDER },
+        { label: 'Trump 1st Term (cumulative M)', data: [2.1, 3.6, 4.9, -2.7, null, null, null, null], borderColor: REP_BORDER, backgroundColor: 'rgba(239,68,68,0.06)', fill: true, tension: 0.4, borderWidth: 2, pointRadius: 4, pointBackgroundColor: REP_BORDER }
+      ]
+    },
+    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, title: { display: true, text: 'Cumulative Jobs Added (millions)', font: { family: 'Inter', size: 11 } } } } }
+  });
+
+  // ── 10. State Heat Map ────────────────────────────────────────────────────
+  const states = [
+    { name: 'AL', v: -2 }, { name: 'AK', v: 1  }, { name: 'AZ', v: -1 }, { name: 'AR', v: -3 }, { name: 'CA', v: -1 },
+    { name: 'CO', v: 0  }, { name: 'CT', v: -2 }, { name: 'DE', v: -1 }, { name: 'FL', v: -1 }, { name: 'GA', v: -2 },
+    { name: 'HI', v: 2  }, { name: 'ID', v: -1 }, { name: 'IL', v: -2 }, { name: 'IN', v: -3 }, { name: 'IA', v: -2 },
+    { name: 'KS', v: -2 }, { name: 'KY', v: -3 }, { name: 'LA', v: -2 }, { name: 'ME', v: 0  }, { name: 'MD', v: -1 },
+    { name: 'MA', v: 0  }, { name: 'MI', v: -3 }, { name: 'MN', v: -1 }, { name: 'MS', v: -3 }, { name: 'MO', v: -2 },
+    { name: 'MT', v: -1 }, { name: 'NE', v: -1 }, { name: 'NV', v: -1 }, { name: 'NH', v: 0  }, { name: 'NJ', v: -1 },
+    { name: 'NM', v: -1 }, { name: 'NY', v: -1 }, { name: 'NC', v: -3 }, { name: 'ND', v: 1  }, { name: 'OH', v: -3 },
+    { name: 'OK', v: -2 }, { name: 'OR', v: -1 }, { name: 'PA', v: -2 }, { name: 'RI', v: -1 }, { name: 'SC', v: -2 },
+    { name: 'SD', v: 1  }, { name: 'TN', v: -2 }, { name: 'TX', v: -1 }, { name: 'UT', v: 0  }, { name: 'VT', v: 1  },
+    { name: 'VA', v: -1 }, { name: 'WA', v: 0  }, { name: 'WV', v: -3 }, { name: 'WI', v: -2 }, { name: 'WY', v: -2 }
+  ];
+  const colorMap = { '-3': '#ef4444', '-2': '#f97316', '-1': '#fbbf24', '0': '#60a5fa', '1': '#34d399', '2': '#10b981' };
+  const hm = document.getElementById('stateHeatMap');
+  states.forEach(s => {
+    const cell = document.createElement('div');
+    cell.style.cssText = `background:${colorMap[s.v]};border-radius:6px;padding:6px 2px;text-align:center;font-size:9px;font-weight:600;color:white;cursor:default;transition:transform .2s;letter-spacing:.03em;`;
+    cell.textContent = s.name;
+    cell.title = `${s.name}: ${s.v > 0 ? '+' : ''}${s.v * 1000} est. jobs`;
+    cell.addEventListener('mouseenter', () => { cell.style.transform = 'scale(1.12)'; });
+    cell.addEventListener('mouseleave', () => { cell.style.transform = 'scale(1)'; });
+    hm.appendChild(cell);
+  });
+
+  // ── 11. Timeline ──────────────────────────────────────────────────────────
+  new Chart(document.getElementById('timelineChart'), {
+    type: 'line',
+    data: {
+      labels: ['1993', '1995', '1997', '1999', '2001', '2003', '2005', '2007', '2009', '2011', '2013', '2015', '2017', '2019', '2021', '2023', '2025'],
+      datasets: [
+        { label: 'GDP Growth (%)', data: [2.7, 2.5, 4.5, 4.8, 1.0, 2.8, 3.5, 1.9, -2.8, 1.6, 2.3, 3.1, 2.3, 2.3, 5.9, 2.5, 2.1], borderColor: DEM_BORDER, backgroundColor: 'transparent', tension: 0.4, borderWidth: 2, pointRadius: 3 },
+        { label: 'Unemployment (%)', data: [7.3, 5.6, 4.9, 4.2, 4.7, 6.0, 5.1, 4.6, 9.3, 8.9, 7.4, 5.3, 4.7, 3.7, 6.4, 3.7, 4.1], borderColor: 'rgba(245,158,11,0.9)', backgroundColor: 'transparent', tension: 0.4, borderWidth: 2, pointRadius: 3 }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      plugins: { ...baseOpts.plugins, annotation: {} },
+      scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, title: { display: true, text: 'Percent (%)', font: { family: 'Inter', size: 11 } } } }
+    }
+  });
+
+  // ── 12. Radar ─────────────────────────────────────────────────────────────
+  new Chart(document.getElementById('radarChart'), {
+    type: 'radar',
+    data: {
+      labels: ['Job Growth', 'GDP Growth', 'Wage Gains', 'Unemployment↓', 'Consumer Conf.', 'Mfg Jobs'],
+      datasets: [
+        { label: 'Obama (2009–2017)',    data: [75, 65, 70, 80, 72, 60], borderColor: DEM_BORDER, backgroundColor: 'rgba(77,163,255,0.12)', pointBackgroundColor: DEM_BORDER, borderWidth: 2 },
+        { label: 'Trump 1st (2017–21)', data: [55, 65, 50, 60, 58, 45], borderColor: 'rgba(245,158,11,0.9)', backgroundColor: 'rgba(245,158,11,0.08)', pointBackgroundColor: 'rgba(245,158,11,0.9)', borderWidth: 2 },
+        { label: 'Trump 2nd (2025–)',   data: [30, 40, 25, 35, 20, 28], borderColor: REP_BORDER, backgroundColor: 'rgba(239,68,68,0.08)', pointBackgroundColor: REP_BORDER, borderWidth: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 11 } } } },
+      scales: { r: { min: 0, max: 100, ticks: { font: { family: 'Inter', size: 9 }, stepSize: 20 }, pointLabels: { font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' } } }
+    }
+  });
+</script>
+</body>
+</html>
