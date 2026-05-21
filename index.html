@@ -103,6 +103,9 @@
         <li><a href="#executive-summary" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Executive Summary
         </a></li>
+        <li><a href="#party-scorecard" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Modern Era Scorecard
+        </a></li>
         <li><a href="#historical-comparison" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Historical Comparisons
         </a></li>
@@ -256,6 +259,108 @@
               <p class="text-[0.9rem] leading-6 text-zinc-700">Real wage increases were <strong class="text-zinc-900">40× greater annually</strong> under Democratic presidencies from 1980–2019 for production workers.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── MODERN ERA SCORECARD ─── -->
+    <section id="party-scorecard" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
+      <div class="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-zinc-50 to-transparent"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">02 · Modern Era Scorecard</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-3 reveal">Democrats vs Republicans<br><span class="text-[#4DA3FF]">1993 – 2026</span></h2>
+        <p class="text-sm text-zinc-500 leading-6 mb-10 reveal max-w-2xl">A president-by-president breakdown of every major economic metric in the modern era. Each number is sourced directly from BLS, BEA, Gallup, and the University of Michigan.</p>
+
+        <!-- ── Per-president jobs chart ── -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Net Jobs per Presidency</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Jobs Added by President — Modern Era</h3>
+          <div class="chart-container"><canvas id="perPresidentJobsChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">This is the starkest number in presidential economics. Democratic presidents in the modern era added a combined <strong class="text-zinc-800">+49.9 million net jobs</strong> — Clinton +22.7M, Obama +11.6M, Biden +15.6M. Republican presidents netted just <strong class="text-zinc-800">−0.82 million</strong> — Bush Jr +1.3M, Trump's first term −2.7M, Trump's second term +0.58M so far. That's a difference of over 50 million jobs across the same 33-year period. The bars below zero represent net job destruction — something that has only happened under Republican administrations in this era.</p>
+          </div>
+        </div>
+
+        <!-- ── Gallup approval chart ── -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Gallup Presidential Approval</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Average Approval Rating by President</h3>
+          <div class="chart-container"><canvas id="gallupApprovalChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Democratic presidents averaged <strong class="text-zinc-800">48.0% approval</strong> vs 44.1% for Republicans across the modern era — a 3.9-point gap. Clinton's 55.1% remains the highest of the six presidencies shown. Both Trump terms average in the low 40s, the lowest of any modern president. Approval ratings reflect how Americans actually felt living under each president's economy — not just the data on paper.</p>
+          </div>
+        </div>
+
+        <!-- ── Consumer sentiment + first-year confidence side by side ── -->
+        <div class="reveal grid md:grid-cols-2 gap-4 mb-6">
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+              <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">UMich Sentiment</p>
+            </div>
+            <h3 class="font-display text-[1.4rem] uppercase leading-none text-[#0A0A0A] mb-4">Consumer Sentiment by President</h3>
+            <div class="chart-container" style="height:300px"><canvas id="sentimentBreakdownChart"></canvas></div>
+            <div class="mt-4 pt-4 border-t border-black/6">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1.5">What this shows</p>
+              <p class="text-xs leading-5 text-zinc-500">Clinton-era consumers were the most confident in modern history (~99). The most striking outlier is <strong class="text-zinc-700">Trump's first term (~96)</strong> — Americans actually felt good before COVID hit. Trump's second term (~50) is the opposite extreme: the lowest reading in 74 years, suggesting the economic anxiety from tariffs and layoffs is hitting household psychology hard.</p>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+            <div class="flex items-center gap-3 mb-1">
+              <span class="h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+              <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400">Gallup Economic Confidence</p>
+            </div>
+            <h3 class="font-display text-[1.4rem] uppercase leading-none text-[#0A0A0A] mb-4">First-Year Economic Confidence</h3>
+            <div class="chart-container" style="height:300px"><canvas id="firstYearConfidenceChart"></canvas></div>
+            <div class="mt-4 pt-4 border-t border-black/6">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1.5">What this shows</p>
+              <p class="text-xs leading-5 text-zinc-500">In their first year in office, Democratic presidents averaged <strong class="text-zinc-700">61% economic confidence</strong> vs 47% for Republicans — a 14-point gap. Clinton and Obama both entered with the public broadly optimistic about the economy's direction. Every Republican first year sits below 50%, with Trump's second term (44%) the lowest of all six.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Two callout cards: recession + inflation ── -->
+        <div class="reveal grid md:grid-cols-2 gap-4">
+
+          <!-- Recession frequency — dark card -->
+          <div class="rounded-2xl border border-black/10 bg-[#10141B] p-7 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-4">Post-WW2 Recession Frequency</p>
+              <div class="flex items-end gap-3 mb-4">
+                <p class="font-display text-[4.5rem] leading-none text-white">10<span class="text-[2.5rem] text-white/30">/11</span></p>
+              </div>
+              <p class="text-[11px] text-[#4DA3FF] mb-5">Recessions that began under Republican presidents</p>
+              <div class="h-px bg-white/[0.06] mb-5"></div>
+              <p class="text-xs leading-5 text-white/50">Of the 11 recessions recorded since World War II, <strong class="text-white/80">10 began under Republican administrations</strong>. The single exception was a brief 1945 contraction under Truman as WWII spending wound down. This pattern holds across every major economic study of the post-war era — including the Princeton Blinder &amp; Watson study and JEC analysis.</p>
+            </div>
+          </div>
+
+          <!-- Inflation nuance — amber accent -->
+          <div class="rounded-2xl border border-amber-200/50 bg-amber-50/50 p-7">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-amber-700/70 mb-4">The One Republican Edge — And Why It Disappears</p>
+            <div class="flex items-end gap-3 mb-4">
+              <p class="font-display text-[4.5rem] leading-none text-amber-800">2.6<span class="text-[2rem] text-amber-400">%</span></p>
+              <p class="text-sm text-amber-600 mb-3">Rep avg<br>vs 3.0% Dem</p>
+            </div>
+            <div class="h-px bg-amber-200/40 mb-5"></div>
+            <p class="text-xs leading-5 text-amber-800">Inflation is the <strong>only metric</strong> where Republicans hold a slight modern-era edge — 2.6% average vs 3.0% for Democrats. But that edge is entirely driven by <strong>Biden's post-COVID spike</strong> (which hit every developed economy). Remove Biden's term and Democrats' inflation average drops below Republicans'. More importantly, <strong>Trump's second term is currently running at 3.8%</strong> — above both party averages — erasing the Republican advantage entirely.</p>
+          </div>
+
         </div>
       </div>
     </section>
@@ -1339,6 +1444,129 @@
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 11 } } } },
       scales: { r: { min: 0, max: 100, ticks: { font: { family: 'Inter', size: 9 }, stepSize: 20 }, pointLabels: { font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' } } }
+    }
+  });
+
+  // ── 13. Per-president jobs (modern era) ──────────────────────────────────
+  const presidentColors = [DEM_COLOR, REP_COLOR, DEM_COLOR, REP_COLOR, DEM_COLOR, REP_COLOR];
+  const presidentBorders = [DEM_BORDER, REP_BORDER, DEM_BORDER, REP_BORDER, DEM_BORDER, REP_BORDER];
+  new Chart(document.getElementById('perPresidentJobsChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Clinton (D)', 'Bush Jr (R)', 'Obama (D)', 'Trump T1 (R)', 'Biden (D)', 'Trump T2 (R)'],
+      datasets: [{
+        label: 'Net Jobs Added (millions)',
+        data: [22.7, 1.3, 11.6, -2.7, 15.6, 0.58],
+        backgroundColor: presidentColors,
+        borderColor: presidentBorders,
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...baseOpts,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.raw > 0 ? '+' : ''}${ctx.raw}M jobs` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { font: { family: 'Inter', size: 11 }, callback: v => `${v > 0 ? '+' : ''}${v}M` },
+          title: { display: true, text: 'Net Jobs (millions)', font: { family: 'Inter', size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ── 14. Gallup approval ratings ──────────────────────────────────────────
+  new Chart(document.getElementById('gallupApprovalChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Clinton (D)', 'Bush Jr (R)', 'Obama (D)', 'Trump T1 (R)', 'Biden (D)', 'Trump T2 (R)'],
+      datasets: [{
+        label: 'Average Gallup Approval (%)',
+        data: [55.1, 49.4, 47.9, 41.0, 41.0, 42.0],
+        backgroundColor: presidentColors,
+        borderColor: presidentBorders,
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...baseOpts,
+      plugins: {
+        legend: { display: false },
+        annotation: {}
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 30, max: 65,
+          ticks: { font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          title: { display: true, text: 'Avg Approval (%)', font: { family: 'Inter', size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ── 15. Consumer sentiment per president ─────────────────────────────────
+  new Chart(document.getElementById('sentimentBreakdownChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Clinton (D)', 'Bush Jr (R)', 'Obama (D)', 'Trump T1 (R)', 'Biden (D)', 'Trump T2 (R)'],
+      datasets: [{
+        label: 'UMich Consumer Sentiment (avg)',
+        data: [99, 85, 77, 96, 63, 50],
+        backgroundColor: presidentColors,
+        borderColor: presidentBorders,
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...baseOpts,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 0, max: 110,
+          ticks: { font: { family: 'Inter', size: 10 } },
+          title: { display: true, text: 'Sentiment Index', font: { family: 'Inter', size: 10 } }
+        }
+      }
+    }
+  });
+
+  // ── 16. First-year economic confidence ───────────────────────────────────
+  new Chart(document.getElementById('firstYearConfidenceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Clinton (D)', 'Bush Jr (R)', 'Obama (D)', 'Trump T1 (R)', 'Biden (D)', 'Trump T2 (R)'],
+      datasets: [{
+        label: 'First-Year Economic Confidence (%)',
+        data: [75, 48, 71, 48, 52, 44],
+        backgroundColor: presidentColors,
+        borderColor: presidentBorders,
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...baseOpts,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 0, max: 100,
+          ticks: { font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
+          title: { display: true, text: 'Confidence (%)', font: { family: 'Inter', size: 10 } }
+        }
+      }
     }
   });
 </script>
