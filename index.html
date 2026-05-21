@@ -281,6 +281,10 @@
           </div>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Democratic vs Republican Administrations</h3>
           <div class="chart-container"><canvas id="jobCreationChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Since 1945, Democratic presidents have presided over <strong class="text-zinc-800">83 million total jobs</strong> — more than 2.5 times the 32 million created under Republican administrations. On a monthly basis that's 164,000 new jobs per month under Democrats vs just 61,000 under Republicans. Even when adjusting for the number of years each party held office, Democrats have outpaced Republicans at every time horizon measured.</p>
+          </div>
         </div>
 
         <!-- GDP chart -->
@@ -291,6 +295,10 @@
           </div>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Average Annual GDP Growth by Study</h3>
           <div class="chart-container"><canvas id="gdpChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Four completely independent studies — Princeton's Blinder &amp; Watson, CNN's analysis, the NY Times, and a 2024 presidential data review — all reach the same conclusion: the US economy grows roughly <strong class="text-zinc-800">1.7 percentage points faster per year</strong> under Democratic presidents. That gap compounds over a four-year term into an economy that is approximately 7% larger than it would have been under average Republican stewardship. The consistency across studies makes this one of the most replicated findings in presidential economics.</p>
+          </div>
         </div>
 
         <!-- Unemployment chart -->
@@ -301,6 +309,10 @@
           </div>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Unemployment Rate Changes</h3>
           <div class="chart-container"><canvas id="unemploymentChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Under Democratic administrations, unemployment has averaged <strong class="text-zinc-800">5.2%</strong> and typically falls during their tenure — dropping an average of 0.8 percentage points by the end of a term. Under Republican administrations, unemployment averages a higher <strong class="text-zinc-800">5.8%</strong> and tends to rise — increasing by 1.1 percentage points on average. In other words, Americans are more likely to be working when a Democrat is in office, and more likely to lose work when a Republican is.</p>
+          </div>
         </div>
 
         <!-- Real wage cards -->
@@ -476,6 +488,10 @@
           </div>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Job Creation 2025–2026</h3>
           <div class="chart-container"><canvas id="trumpJobTrendChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Monthly job creation collapsed at the start of Trump's second term, falling from the 125,000/month pace of 2024 to as low as <strong class="text-zinc-800">8,000 jobs in July 2025</strong> — a level not seen since the COVID shutdowns. The economy added only 584,000 total jobs in 2025, the slowest annual pace since 2020, and that number was subsequently revised down further to 181,000 after BLS benchmark corrections. While monthly figures edged up into early 2026, the pace still falls well short of the ~100,000 needed each month just to absorb new workers entering the labor force.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -491,17 +507,29 @@
         <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-10 reveal">Jobs by Demographics<br><span class="text-zinc-400 text-[2rem] md:text-[2.6rem]">March 2026</span></h2>
 
         <div class="grid md:grid-cols-3 gap-4 mb-8">
-          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 flex flex-col">
             <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Education Level</p>
             <div class="chart-container" style="height:260px"><canvas id="educationUnemploymentChart"></canvas></div>
+            <div class="mt-4 pt-4 border-t border-black/6">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1.5">What this shows</p>
+              <p class="text-xs leading-5 text-zinc-500">Workers without a high school diploma face <strong class="text-zinc-700">5.9% unemployment</strong> — more than double the 2.8% rate for college graduates. The less education a worker has, the harder economic downturns hit them.</p>
+            </div>
           </div>
-          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 flex flex-col">
             <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Race / Ethnicity</p>
             <div class="chart-container" style="height:260px"><canvas id="raceUnemploymentChart"></canvas></div>
+            <div class="mt-4 pt-4 border-t border-black/6">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1.5">What this shows</p>
+              <p class="text-xs leading-5 text-zinc-500">Black workers face <strong class="text-zinc-700">7.1% unemployment</strong> — nearly double the 3.6% rate for white workers. This persistent racial gap has not improved under current administration policies.</p>
+            </div>
           </div>
-          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6">
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 flex flex-col">
             <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">By Age Group</p>
             <div class="chart-container" style="height:260px"><canvas id="ageUnemploymentChart"></canvas></div>
+            <div class="mt-4 pt-4 border-t border-black/6">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1.5">What this shows</p>
+              <p class="text-xs leading-5 text-zinc-500">Workers aged 16–19 face <strong class="text-zinc-700">14.2% unemployment</strong> — nearly five times the rate for workers 55+. Young people entering the workforce are absorbing the worst of the current job slowdown.</p>
+            </div>
           </div>
         </div>
 
@@ -660,6 +688,10 @@
           <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Fiscal Policy</p>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Deficit Comparison</h3>
           <div class="chart-container"><canvas id="bushTrumpFiscalChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Both presidents dramatically expanded the federal deficit. Bush's deficit peaked during the 2008 financial crisis. Trump's first-term deficit <strong class="text-zinc-800">exploded to 15.2% of GDP in 2020</strong> — the largest peacetime deficit in US history — due to pandemic relief spending. In Trump's second term, the deficit remains elevated at an estimated 6.5% of GDP in 2025, nearly double the pre-pandemic historical average of roughly 3%, driven by extended tax cuts and reduced federal revenue.</p>
+          </div>
         </div>
 
         <!-- Similarities / differences -->
@@ -702,6 +734,10 @@
           <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Job Growth</p>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Cumulative Job Creation</h3>
           <div class="chart-container"><canvas id="obamaTrumpJobsChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Obama inherited the worst job market since the Great Depression — his first year saw a net loss of 3.5 million jobs as the financial crisis continued. But the trajectory steadily improved, finishing with <strong class="text-zinc-800">11.6 million net new jobs</strong> over eight years. Trump's first term started strong, adding nearly 5 million jobs in three years, then lost it all — and more — in 2020 due to COVID, ending with a net loss of 2.7 million. The divergence makes clear that Obama's recovery, while slow to start, was far more durable than Trump's pre-pandemic gains.</p>
+          </div>
         </div>
 
         <div class="reveal rounded-2xl border border-black/10 bg-white/80 backdrop-blur-sm shadow-[0_12px_28px_rgba(10,10,10,0.05)] p-6 mb-6 overflow-x-auto">
@@ -802,6 +838,10 @@
           <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Timeline</p>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Presidential Economic Performance 1993–2026</h3>
           <div class="chart-container"><canvas id="timelineChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">This 33-year view traces GDP growth and unemployment together. The Clinton-era boom of the late 1990s produced 4–5% GDP growth with falling unemployment. The 2008–09 recession under Bush caused the deepest GDP collapse since the 1930s and sent unemployment to 9.3%. Obama's recovery was steady but gradual — GDP growth never spectacular but unemployment fell consistently for seven years. The post-COVID rebound in 2021 produced a one-time <strong class="text-zinc-800">5.9% GDP spike</strong>, but by 2025 growth had slowed back to 2.1% while unemployment began ticking up again.</p>
+          </div>
         </div>
 
         <!-- Radar chart -->
@@ -809,6 +849,10 @@
           <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Multi-Dimensional</p>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Performance Comparison Radar</h3>
           <div class="chart-container"><canvas id="radarChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">This spider chart scores three administrations across six economic dimensions simultaneously. A larger filled area means stronger overall performance. <strong class="text-zinc-800">Obama's presidency scores highest</strong> across nearly every category — consistent job growth, wage gains, and rising consumer confidence. Trump's first term (pre-COVID) performed moderately, strongest on GDP growth. Trump's second term (2025–) shows the <strong class="text-zinc-800">smallest footprint</strong> of the three — particularly weak on consumer confidence (record lows) and wage growth (declined in real terms during 2025), signaling that most Americans are not feeling economic improvement despite official claims.</p>
+          </div>
         </div>
       </div>
     </section>
