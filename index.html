@@ -1155,11 +1155,34 @@
           <p class="text-[10px] uppercase tracking-[0.16em] text-zinc-400 mb-1">State Performance</p>
           <h3 class="font-display text-[1.6rem] uppercase leading-none text-[#0A0A0A] mb-4">Blue-Collar Job Heat Map 2025</h3>
           <div id="stateHeatMap" class="grid gap-1 p-2" style="grid-template-columns: repeat(10, 1fr)"></div>
-          <div class="flex items-center gap-6 mt-4 pt-4 border-t border-black/5">
-            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-red-500"></div><span class="text-[10px] text-zinc-500">Major losses</span></div>
-            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-amber-400"></div><span class="text-[10px] text-zinc-500">Moderate losses</span></div>
-            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-[#4DA3FF]"></div><span class="text-[10px] text-zinc-500">Minor change</span></div>
-            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-emerald-500"></div><span class="text-[10px] text-zinc-500">Growth</span></div>
+          <div class="flex items-center gap-6 mt-4 pt-4 border-t border-black/5 flex-wrap">
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-red-500"></div><span class="text-[10px] text-zinc-500">Major losses (&gt;2,000 jobs)</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-amber-400"></div><span class="text-[10px] text-zinc-500">Moderate losses (1,000–2,000)</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-[#4DA3FF]"></div><span class="text-[10px] text-zinc-500">Minor change (0–1,000)</span></div>
+            <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-emerald-500"></div><span class="text-[10px] text-zinc-500">Net growth</span></div>
+          </div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Each tile represents one U.S. state. The color shows whether that state gained or lost blue-collar jobs — meaning construction, manufacturing, transportation, and warehouse work — between April and December 2025.</p>
+            <p class="text-sm leading-6 text-zinc-600 mt-3"><strong class="text-zinc-800">The overwhelming picture is red and orange.</strong> Of the 50 states, 45 failed to meet the average annual blue-collar job creation rate from the previous administration. Most states lost somewhere between 1,000 and 3,000 blue-collar positions during this period — jobs in the exact industries Trump promised to restore. Only a handful of states (Alaska, Hawaii, North and South Dakota, Vermont) showed modest gains, largely due to local energy or agriculture factors unrelated to federal policy.</p>
+            <p class="text-sm leading-6 text-zinc-600 mt-3">The hardest-hit states — shown in deep red — include <strong class="text-zinc-800">Michigan, Ohio, Indiana, Kentucky, Mississippi, North Carolina, and West Virginia</strong>: the manufacturing and industrial heartland that was told this administration would bring jobs back. North Carolina alone lost nearly 2,000 blue-collar positions. The 189,600 total blue-collar jobs lost nationally are not spread evenly — they are concentrated precisely in the communities that were promised the opposite.</p>
+            <div class="mt-4 grid md:grid-cols-3 gap-4">
+              <div class="rounded-xl border border-black/8 bg-zinc-50 p-4">
+                <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1">States with losses</p>
+                <p class="font-display text-[2rem] leading-none text-[#0A0A0A]">45 / 50</p>
+                <p class="text-xs text-zinc-500 mt-1">Failed to match prior-term job creation pace</p>
+              </div>
+              <div class="rounded-xl border border-black/8 bg-zinc-50 p-4">
+                <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1">Avg state loss</p>
+                <p class="font-display text-[2rem] leading-none text-[#0A0A0A]">2,500+</p>
+                <p class="text-xs text-zinc-500 mt-1">Blue-collar jobs per state, Apr–Dec 2025</p>
+              </div>
+              <div class="rounded-xl border border-black/8 bg-zinc-50 p-4">
+                <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1">Total national loss</p>
+                <p class="font-display text-[2rem] leading-none text-[#0A0A0A]">189,600</p>
+                <p class="text-xs text-zinc-500 mt-1">Blue-collar jobs since April 2025</p>
+              </div>
+            </div>
           </div>
         </div>
 
