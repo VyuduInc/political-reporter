@@ -118,6 +118,9 @@
         <li><a href="#job-analysis" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Jobs by Demographics
         </a></li>
+        <li><a href="#immigration-economy" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Immigration & the Economy
+        </a></li>
         <li><a href="#business-closures" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Business Closures
         </a></li>
@@ -667,6 +670,113 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ─── IMMIGRATION & THE ECONOMY ─── -->
+    <section id="immigration-economy" class="relative overflow-hidden bg-[#10141B] px-6 py-14">
+      <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+
+      <div class="relative max-w-5xl mx-auto">
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-white/[0.08] max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-white/30">Immigration &amp; the Economy</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-white mb-3 reveal">What Losing<br>Immigrants Costs</h2>
+        <p class="text-sm text-white/40 leading-6 mb-4 reveal max-w-2xl">Based on peer-reviewed research (CU Boulder / NBER, May 2026), Peterson Institute modeling, and current BLS data. Sources linked in the Citations section.</p>
+
+        <!-- Core finding callout -->
+        <div class="reveal rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.07] p-6 mb-8">
+          <div class="flex items-start gap-4">
+            <span class="shrink-0 mt-0.5 relative flex h-2.5 w-2.5"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4DA3FF]/50"></span><span class="relative h-2.5 w-2.5 rounded-full bg-[#4DA3FF]"></span></span>
+            <div>
+              <p class="text-[9px] uppercase tracking-[0.16em] text-[#4DA3FF] mb-2">Key Finding — CU Boulder / NBER, May 2026</p>
+              <p class="text-sm leading-6 text-white/70"><strong class="text-white">Mass deportation does not free up jobs for American workers — it eliminates jobs for them.</strong> Economist Chloe East's landmark study found no evidence that ICE enforcement benefits U.S.-born workers. If anything, job opportunities for U.S.-born workers go <em>down</em> as a result of enforcement surges. <a href="https://www.colorado.edu/today/2026/05/04/heightened-ice-enforcement-harms-us-born-workers-shrinks-workforce" target="_blank" rel="noopener" class="text-[#4DA3FF] underline underline-offset-2 hover:text-white transition-colors">CU Boulder →</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Workforce share by sector ── -->
+        <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-[#4DA3FF] shadow-[0_0_8px_rgba(77,163,255,0.4)]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-white/40">Workforce Concentration</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-white mb-4">Immigrant Share of U.S. Workforce by Sector</h3>
+          <div class="chart-container"><canvas id="immigrantWorkforceChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-white/[0.06]">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-white/50">Immigrants make up 18% of the total U.S. workforce overall — but their share in critical sectors is far higher. <strong class="text-white/80">61% of all U.S. farmworkers are immigrants</strong>, including 36–57% who are undocumented. More than a third of hospitality and food service workers in major metros are immigrants. Nearly a quarter of construction workers are immigrants. The Trump administration's own Department of Labor acknowledged in October 2025 that the near-total end of undocumented worker inflow poses "immediate dangers to the American food supply" because American workers are "unwilling or unable" to take agricultural positions. <a href="https://www.migrationpolicy.org/content/explainer-immigrants-and-us-economy" target="_blank" rel="noopener" class="text-[#4DA3FF] hover:text-white transition-colors underline underline-offset-2">Migration Policy Institute →</a></p>
+          </div>
+        </div>
+
+        <!-- ── Healthcare workforce breakdown ── -->
+        <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-white/40">Healthcare System Exposure</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-white mb-4">Foreign-Born Workers in U.S. Healthcare</h3>
+          <div class="chart-container" style="height:300px"><canvas id="healthcareWorkforceChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-white/[0.06]">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-white/50">The U.S. healthcare system — already strained by chronic worker shortages — is disproportionately staffed by foreign-born workers at every level. <strong class="text-white/80">1 in 4 physicians and surgeons (26%) are foreign-born</strong>, as are 27.5% of registered nurses. In rural areas, where shortages are most acute, immigrants fill an even larger share of roles. The KFF notes that reducing immigration "could reduce access to care, lead to understaffing and poorer quality of care, and increase hospitals' labor costs" — costs that get passed to patients. Sources: <a href="https://nfap.com/wp-content/uploads/2025/11/The-Contributions-of-Foreign-Born-Workers-to-US-Healthcare.NFAP-Policy-Brief.-2025.pdf" target="_blank" rel="noopener" class="text-[#4DA3FF] hover:text-white transition-colors underline underline-offset-2">NFAP 2025</a>, <a href="https://www.kff.org/racial-equity-and-health-policy/what-role-do-immigrants-play-in-the-hospital-workforce/" target="_blank" rel="noopener" class="text-[#4DA3FF] hover:text-white transition-colors underline underline-offset-2">KFF</a>, <a href="https://www.bakerinstitute.org/research/understanding-role-immigrants-us-health-sector-employment-trends-2007-21" target="_blank" rel="noopener" class="text-[#4DA3FF] hover:text-white transition-colors underline underline-offset-2">Baker Institute</a></p>
+          </div>
+        </div>
+
+        <!-- ── Tax contribution stat cards ── -->
+        <div class="reveal grid md:grid-cols-3 gap-4 mb-6">
+          <div class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-3">Undocumented Immigrants · 2022</p>
+            <p class="font-display text-[2.8rem] leading-none text-white">$96.7B</p>
+            <p class="text-[11px] text-[#4DA3FF] mt-2 leading-5">Paid in federal, state &amp; local taxes — including $25.7B to Social Security and $6.4B to Medicare, programs they cannot legally collect from</p>
+            <p class="text-[9px] text-white/25 mt-3"><a href="https://cmsny.org/importance-of-immigrant-labor-to-us-economy/" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors underline underline-offset-2">Source: CMSNY →</a></p>
+          </div>
+          <div class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-3">All Immigrant Households · 2021</p>
+            <p class="font-display text-[2.8rem] leading-none text-white">$524.7B</p>
+            <p class="text-[11px] text-[#4DA3FF] mt-2 leading-5">Total taxes paid. From 1994–2023, immigrants generated a cumulative fiscal surplus of $14.5 trillion for the U.S. economy</p>
+            <p class="text-[9px] text-white/25 mt-3"><a href="https://americasvoice.org/blog/immigrants-keep-on-innovating-to-keep-the-country-going/" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors underline underline-offset-2">Source: America's Voice →</a></p>
+          </div>
+          <div class="rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-3">Fortune 500 Founding</p>
+            <p class="font-display text-[2.8rem] leading-none text-white">46%</p>
+            <p class="text-[11px] text-[#4DA3FF] mt-2 leading-5">Of Fortune 500 companies founded by immigrants or their children. Those companies employ 19M people and generate $4.8T in revenue — 1 in every 7 dollars of U.S. business</p>
+            <p class="text-[9px] text-white/25 mt-3"><a href="https://www.americanimmigrationcouncil.org/press-release/fortune-500-2024-report-immigrant-entrepreneurs-create-jobs-across-united-states/" target="_blank" rel="noopener" class="hover:text-white/50 transition-colors underline underline-offset-2">Source: American Immigration Council →</a></p>
+          </div>
+        </div>
+
+        <!-- ── Deportation scenarios chart ── -->
+        <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.04] p-6 mb-6">
+          <div class="flex items-center gap-3 mb-1">
+            <span class="h-2 w-2 rounded-full bg-red-400 shadow-[0_0_8px_rgba(239,68,68,0.4)]"></span>
+            <p class="text-[10px] uppercase tracking-[0.16em] text-white/40">Peterson Institute Modeling</p>
+          </div>
+          <h3 class="font-display text-[1.6rem] uppercase leading-none text-white mb-4">Deportation Scale vs Economic Damage by 2028</h3>
+          <div class="chart-container"><canvas id="deportationScenariosChart"></canvas></div>
+          <div class="mt-5 pt-5 border-t border-white/[0.06]">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-white/50">The Peterson Institute modeled two deportation scenarios. Even a <strong class="text-white/80">moderate deportation of 1.3 million people</strong> would shrink GDP by 1.2%, reduce employment by 1.1%, and raise prices by 1.5% by 2028. Scaling to <strong class="text-white/80">8.3 million deportations</strong> — closer to what the current administration has signaled — would cause a <strong class="text-white/80">7.4% GDP reduction</strong>, meaning the U.S. economy would effectively produce no net growth at all during Trump's second term, with a 9.1% spike in consumer prices on top. The American Immigration Council separately estimated a sustained deportation campaign would cost between <strong class="text-white/80">$1.1 and $1.7 trillion in lost GDP</strong>. <a href="https://www.jec.senate.gov/public/index.cfm/democrats/2024/12/mass-deportations-would-deliver-a-catastrophic-blow-to-the-u-s-economy" target="_blank" rel="noopener" class="text-[#4DA3FF] hover:text-white transition-colors underline underline-offset-2">JEC Source →</a></p>
+          </div>
+        </div>
+
+        <!-- ── Chilling effect + myth-bust callouts ── -->
+        <div class="reveal grid md:grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.06] p-7">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-[#4DA3FF] mb-4">The Chilling Effect — CU Boulder / NBER 2026</p>
+            <p class="font-display text-[2rem] uppercase text-white leading-tight mb-4">1,200 Arrests →<br><span class="text-[#4DA3FF]">8,774 Workers</span><br>Stop Working</p>
+            <div class="h-px bg-white/[0.06] mb-4"></div>
+            <p class="text-xs leading-5 text-white/50">When ICE arrests 1,200 people, approximately <strong class="text-white/70">7,574 additional undocumented immigrants</strong> who weren't arrested still stop showing up to work out of fear — plus <strong class="text-white/70">1,200 U.S.-born workers</strong> lose their jobs because the businesses they work for can no longer operate at scale. That means <strong class="text-white/70">for every 6 undocumented workers removed, 1 American worker loses their job too.</strong> <a href="https://www.npr.org/sections/planet-money/2026/05/12/g-s1-121493/the-economic-chilling-effect-of-trumps-immigration-crackdown" target="_blank" rel="noopener" class="text-[#4DA3FF] underline underline-offset-2 hover:text-white transition-colors">NPR / Planet Money →</a></p>
+          </div>
+          <div class="rounded-2xl border border-amber-400/20 bg-amber-400/[0.05] p-7">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-amber-400/70 mb-4">Debunked — "Americans Will Fill the Jobs"</p>
+            <p class="font-display text-[2rem] uppercase text-white leading-tight mb-4">For Every<br><span class="text-amber-300">500K Deported</span><br>44,000 U.S. Jobs Lost</p>
+            <div class="h-px bg-white/[0.06] mb-4"></div>
+            <p class="text-xs leading-5 text-white/50">Multiple studies confirm employers <strong class="text-white/70">do not raise wages</strong> to attract U.S.-born workers when immigrants disappear — they reduce production and hire fewer people overall. U.S.-born workers do not move into farm labor, meatpacking, or construction laborer roles at scale. Every historical precedent — the 1930s, Obama-era enforcement, Trump's first term — shows mass deportation harms both immigrant and native-born workers. <a href="https://www.epi.org/publication/trumps-deportation-agenda-will-destroy-millions-of-jobs-both-immigrants-and-u-s-born-workers-would-suffer-job-losses-particularly-in-construction-and-child-care/" target="_blank" rel="noopener" class="text-amber-300 underline underline-offset-2 hover:text-white transition-colors">EPI Report →</a></p>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1444,6 +1554,131 @@
       responsive: true, maintainAspectRatio: false,
       plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 11 } } } },
       scales: { r: { min: 0, max: 100, ticks: { font: { family: 'Inter', size: 9 }, stepSize: 20 }, pointLabels: { font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' } } }
+    }
+  });
+
+  // ── Immigrant workforce share by sector ─────────────────────────────────
+  new Chart(document.getElementById('immigrantWorkforceChart'), {
+    type: 'bar',
+    data: {
+      labels: [
+        'Crop Production / Farmworkers',
+        'Hospitality & Food Service (major metros)',
+        'Registered Nurses',
+        'Physicians & Surgeons',
+        'Construction',
+        'Meatpacking / Food Processing',
+        'Healthcare Overall',
+        'Home Health Aides',
+        'Hospital Workers',
+        'Total U.S. Workforce'
+      ],
+      datasets: [{
+        label: 'Immigrant Share (%)',
+        data: [61, 35, 27.5, 26, 23, 18, 18, 17, 16, 18],
+        backgroundColor: [
+          'rgba(239,68,68,0.85)', 'rgba(239,68,68,0.75)',
+          'rgba(77,163,255,0.85)', 'rgba(77,163,255,0.85)',
+          'rgba(239,68,68,0.65)',
+          'rgba(245,158,11,0.8)',
+          'rgba(77,163,255,0.7)', 'rgba(77,163,255,0.65)', 'rgba(77,163,255,0.6)',
+          'rgba(100,116,139,0.6)'
+        ],
+        borderWidth: 0,
+        borderRadius: 4
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `${ctx.raw}% immigrant workers` } }
+      },
+      scales: {
+        x: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          max: 70
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: 'rgba(255,255,255,0.6)', font: { family: 'Inter', size: 11 } }
+        }
+      }
+    }
+  });
+
+  // ── Healthcare workforce chart ────────────────────────────────────────────
+  new Chart(document.getElementById('healthcareWorkforceChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Physicians &\nSurgeons', 'Registered\nNurses', 'Healthcare\nOverall', 'Home Health\nAides', 'Hospital\nWorkers'],
+      datasets: [{
+        label: 'Foreign-Born Share (%)',
+        data: [26, 27.5, 18, 17, 16],
+        backgroundColor: 'rgba(52,211,153,0.75)',
+        borderColor: 'rgba(52,211,153,0.9)',
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          title: { display: true, text: 'Foreign-Born Share (%)', color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } },
+          max: 35
+        }
+      }
+    }
+  });
+
+  // ── Deportation scenarios ────────────────────────────────────────────────
+  new Chart(document.getElementById('deportationScenariosChart'), {
+    type: 'bar',
+    data: {
+      labels: ['GDP Impact by 2028 (%)', 'Employment Impact (%)', 'Consumer Price Increase (%)'],
+      datasets: [
+        {
+          label: 'Moderate: 1.3M Deported',
+          data: [-1.2, -1.1, 1.5],
+          backgroundColor: 'rgba(245,158,11,0.8)',
+          borderColor: 'rgba(245,158,11,1)',
+          borderWidth: 1,
+          borderRadius: 6
+        },
+        {
+          label: 'Large-Scale: 8.3M Deported',
+          data: [-7.4, -7.0, 9.1],
+          backgroundColor: 'rgba(239,68,68,0.85)',
+          borderColor: 'rgba(239,68,68,1)',
+          borderWidth: 1,
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top', labels: { color: 'rgba(255,255,255,0.6)', font: { family: 'Inter', size: 12 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw > 0 ? '+' : ''}${ctx.raw}%` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v > 0 ? '+' : ''}${v}%` },
+          title: { display: true, text: 'Economic Impact (%)', color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } }
+        }
+      }
     }
   });
 
