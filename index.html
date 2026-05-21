@@ -1753,26 +1753,26 @@
   new Chart(document.getElementById('jobCreationChart'), {
     type: 'bar',
     data: {
-      labels: ['Total Jobs 1945–2023 (M)', 'Monthly Average (M)', 'Modern Era 1980s+'],
+      labels: ['Total Jobs\n1945–2023 (M)', 'Monthly\nAverage (M)', 'Modern Era\n1980s+'],
       datasets: [
         { label: 'Democratic Presidents', data: [83, 0.164, 50], backgroundColor: DEM_COLOR, borderColor: DEM_BORDER, borderWidth: 1, borderRadius: 6 },
         { label: 'Republican Presidents', data: [32, 0.061, 17], backgroundColor: REP_COLOR, borderColor: REP_BORDER, borderWidth: 1, borderRadius: 6 }
       ]
     },
-    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Jobs (millions)', font: { family: 'Inter', size: 11 } } } } }
+    options: { ...baseOpts, layout: { padding: { bottom: 8 } }, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Jobs (millions)', font: { family: 'Inter', size: 11 } } } } }
   });
 
   // ── 2. GDP ────────────────────────────────────────────────────────────────
   new Chart(document.getElementById('gdpChart'), {
     type: 'bar',
     data: {
-      labels: ['Blinder & Watson', 'CNN Analysis', 'NY Times Study', 'Presidential Data 2024'],
+      labels: ['Blinder &\nWatson', 'CNN\nAnalysis', 'NY Times\nStudy', 'Presidential\nData 2024'],
       datasets: [
         { label: 'Democratic Presidents (%)', data: [4.3, 4.1, 4.6, 3.46], backgroundColor: DEM_COLOR, borderColor: DEM_BORDER, borderWidth: 1, borderRadius: 6 },
         { label: 'Republican Presidents (%)', data: [2.5, 2.5, 2.4, 2.4], backgroundColor: REP_COLOR, borderColor: REP_BORDER, borderWidth: 1, borderRadius: 6 }
       ]
     },
-    options: { ...baseOpts, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Avg Annual GDP Growth (%)', font: { family: 'Inter', size: 11 } } } } }
+    options: { ...baseOpts, layout: { padding: { bottom: 8 } }, scales: { ...baseOpts.scales, y: { ...baseOpts.scales.y, beginAtZero: true, title: { display: true, text: 'Avg Annual GDP Growth (%)', font: { family: 'Inter', size: 11 } } } } }
   });
 
   // ── 3. Unemployment ───────────────────────────────────────────────────────
@@ -1928,8 +1928,9 @@
     },
     options: {
       responsive: true, maintainAspectRatio: false,
+      layout: { padding: { top: 16, bottom: 16, left: 16, right: 16 } },
       plugins: { legend: { position: 'bottom', labels: { font: { family: 'Inter', size: 11 } } } },
-      scales: { r: { min: 0, max: 100, ticks: { font: { family: 'Inter', size: 9 }, stepSize: 20 }, pointLabels: { font: { family: 'Inter', size: 11 } }, grid: { color: 'rgba(0,0,0,0.06)' } } }
+      scales: { r: { min: 0, max: 100, ticks: { font: { family: 'Inter', size: 9 }, stepSize: 20 }, pointLabels: { font: { family: 'Inter', size: 10 } }, grid: { color: 'rgba(0,0,0,0.06)' } } }
     }
   });
 
@@ -1958,14 +1959,19 @@
         legend: { display: false },
         tooltip: { callbacks: { label: ctx => `${ctx.raw}% of household income` } }
       },
+      layout: { padding: { left: 8, right: 16, top: 4, bottom: 4 } },
       scales: {
         x: {
           grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          ticks: { font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
           title: { display: true, text: 'Annual tariff cost as % of income (Yale Budget Lab)', font: { family: 'Inter', size: 10 } },
           max: 5.5
         },
-        y: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } }
+        y: {
+          grid: { display: false },
+          ticks: { font: { family: 'Inter', size: 10 } },
+          afterFit: (axis) => { axis.width = Math.max(axis.width, 148); }
+        }
       }
     }
   });
@@ -2031,14 +2037,15 @@
     },
     options: {
       ...baseOpts,
+      layout: { padding: { bottom: 10 } },
       plugins: { legend: { display: false } },
       scales: {
         x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { font: { family: 'Inter', size: 10 } } },
         y: {
           grid: { color: 'rgba(0,0,0,0.04)' },
           min: 70, max: 115,
-          ticks: { font: { family: 'Inter', size: 11 } },
-          title: { display: true, text: 'Index (Jan 2025 = 100)', font: { family: 'Inter', size: 11 } }
+          ticks: { font: { family: 'Inter', size: 10 } },
+          title: { display: true, text: 'Index (Jan 2025 = 100)', font: { family: 'Inter', size: 10 } }
         }
       }
     }
@@ -2049,12 +2056,12 @@
     type: 'bar',
     data: {
       labels: [
-        'Crop Production / Farmworkers',
-        'Hospitality & Food Service (major metros)',
+        'Crop Production /\nFarmworkers',
+        'Hospitality &\nFood Service',
         'Registered Nurses',
-        'Physicians & Surgeons',
+        'Physicians &\nSurgeons',
         'Construction',
-        'Meatpacking / Food Processing',
+        'Meatpacking /\nFood Processing',
         'Healthcare Overall',
         'Home Health Aides',
         'Hospital Workers',
@@ -2086,14 +2093,16 @@
       scales: {
         x: {
           grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
           max: 70
         },
         y: {
           grid: { display: false },
-          ticks: { color: 'rgba(255,255,255,0.6)', font: { family: 'Inter', size: 11 } }
+          ticks: { color: 'rgba(255,255,255,0.6)', font: { family: 'Inter', size: 10 } },
+          afterFit: (axis) => { axis.width = Math.max(axis.width, 155); }
         }
-      }
+      },
+      layout: { padding: { left: 8, right: 16, top: 4, bottom: 4 } }
     }
   });
 
@@ -2115,11 +2124,12 @@
       responsive: true,
       maintainAspectRatio: false,
       plugins: { legend: { display: false } },
+      layout: { padding: { bottom: 8 } },
       scales: {
-        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 11 } } },
+        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 10 } } },
         y: {
           grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v}%` },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
           title: { display: true, text: 'Foreign-Born Share (%)', color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } },
           max: 35
         }
@@ -2131,7 +2141,7 @@
   new Chart(document.getElementById('deportationScenariosChart'), {
     type: 'bar',
     data: {
-      labels: ['GDP Impact by 2028 (%)', 'Employment Impact (%)', 'Consumer Price Increase (%)'],
+      labels: ['GDP Impact\n(by 2028)', 'Employment\nImpact', 'Consumer Price\nIncrease'],
       datasets: [
         {
           label: 'Moderate: 1.3M Deported',
@@ -2159,13 +2169,14 @@
         tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw > 0 ? '+' : ''}${ctx.raw}%` } }
       },
       scales: {
-        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 11 } } },
+        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 10 } } },
         y: {
           grid: { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 11 }, callback: v => `${v > 0 ? '+' : ''}${v}%` },
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 10 }, callback: v => `${v > 0 ? '+' : ''}${v}%` },
           title: { display: true, text: 'Economic Impact (%)', color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } }
         }
-      }
+      },
+      layout: { padding: { bottom: 10 } }
     }
   });
 
@@ -2284,6 +2295,7 @@
       },
       options: {
         ...baseOpts,
+        layout: { padding: { top: 8, bottom: 8, left: 4, right: 8 } },
         plugins: {
           legend: { display: true, labels: { font: { family: 'Inter', size: 10 }, boxWidth: 24, boxHeight: 2, padding: 14 } },
           tooltip: { mode: 'index', intersect: false, callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}%` } }
