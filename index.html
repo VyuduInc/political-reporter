@@ -130,6 +130,9 @@
         <li><a href="#fun-money" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Fun Years &amp; Lifestyle
         </a></li>
+        <li><a href="#wealth-pattern" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Wealth Distribution
+        </a></li>
         <li><a href="#business-closures" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Business Closures
         </a></li>
@@ -1355,6 +1358,188 @@
       </div>
     </section>
 
+    <!-- ─── WEALTH PATTERN ─── -->
+    <section id="wealth-pattern" class="relative overflow-hidden bg-zinc-50 px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-40"></div>
+      <div class="relative max-w-5xl mx-auto">
+
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">11 · Wealth Distribution</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-4 reveal">The Wealth Pattern:<br>Broad Growth vs<br>Upward Transfer</h2>
+        <p class="text-[1rem] leading-7 text-zinc-500 mb-4 max-w-3xl reveal">Democrats tend to produce broader economic growth — more GDP, more jobs, more middle-class gains. Republicans tend to pass tax policies that concentrate gains at the top while cutting programs for everyone else. This isn't a theory. Here's what the pattern looks like in concrete numbers.</p>
+        <p class="text-sm leading-6 text-zinc-400 mb-10 max-w-3xl reveal italic">Note: this is a pattern, not a law of nature. Eisenhower-era Republicans accepted high top tax rates. And even under Democrats, inequality persists — they moderate it rather than eliminate it. But the modern post-Reagan Republican pattern is clear and documented.</p>
+
+        <!-- 3 hero stat cards -->
+        <div class="grid md:grid-cols-3 gap-4 mb-10">
+          <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-6 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark opacity-100"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-3">Billionaire Wealth Gain · 2017–2023</p>
+              <p class="font-display text-[3.2rem] leading-none tracking-wide text-white">$2.2T</p>
+              <p class="text-[11px] text-[#4DA3FF] mt-1">Since the 2017 GOP Tax Law (TCJA)</p>
+              <div class="absolute top-5 right-5">
+                <span class="relative flex h-2 w-2">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-500/50"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-red-500"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal rounded-2xl border border-red-200 bg-red-50 p-6 shadow-[0_12px_28px_rgba(239,68,68,0.06)]">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-red-400 mb-3">Billionaire Wealth Increase Since TCJA</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-red-600">+77%</p>
+            <p class="text-[11px] text-red-400 mt-1">748 billionaires — Americans for Tax Fairness</p>
+          </div>
+          <div class="reveal rounded-2xl border border-amber-200 bg-amber-50 p-6 shadow-[0_12px_28px_rgba(245,158,11,0.06)]">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-amber-600 mb-3">TCJA Added to National Deficit</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-amber-700">$1.9T</p>
+            <p class="text-[11px] text-amber-600 mt-1">Non-partisan CBO / JCT estimate · 10-year window</p>
+          </div>
+        </div>
+
+        <!-- Billionaire wealth before/after TCJA chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm mb-6">
+          <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Americans for Tax Fairness · Forbes 400 Data · 2017–2023</p>
+          <p class="font-semibold text-[0.95rem] text-zinc-800 mb-4">U.S. Billionaire Collective Net Worth: Before vs After GOP Tax Law</p>
+          <div class="chart-container" style="height:260px">
+            <canvas id="billionaireWealthChart"></canvas>
+          </div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">America's 748 billionaires held roughly <strong class="text-zinc-800">$2.86 trillion</strong> in collective net worth when the 2017 Tax Cuts and Jobs Act passed. By 2023, that figure had grown to approximately <strong class="text-zinc-800">$5.06 trillion</strong> — a gain of <strong class="text-zinc-800">$2.2 trillion (+77%)</strong> in six years. During that same period, the TCJA added <strong class="text-zinc-800">$1.9 trillion to the national deficit</strong>. Both numbers happened simultaneously: the top gained $2.2T, and the public owed $1.9T more. The middle class financed wealth transfers to the very top through the national debt their children will repay.</p>
+          </div>
+        </div>
+
+        <!-- GOP Tax costs + Policy priorities side-by-side -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <!-- Republican tax cut deficit costs chart -->
+          <div class="reveal flex flex-col rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-1">CBO / JCT Estimates · 10-Year Budget Window</p>
+            <p class="font-semibold text-[0.95rem] text-zinc-800 mb-4">Modern GOP Tax Cuts: Cost to the Deficit</p>
+            <div class="chart-container" style="height:240px">
+              <canvas id="gopTaxCostChart"></canvas>
+            </div>
+            <div class="mt-4 pt-4 border-t border-black/5">
+              <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+              <p class="text-sm leading-6 text-zinc-600">Each modern Republican presidency has passed a major tax cut heavily weighted toward high-income earners and corporations — each adding well over a trillion dollars to the national deficit. The pattern is not accidental: the top rate falls, the corporate rate falls, and the debt rises. The 2025 proposed TCJA extension would add an estimated <strong class="text-zinc-800">$4.6 trillion more</strong>.</p>
+            </div>
+          </div>
+
+          <!-- Policy priorities comparison -->
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">JEC 2024 · House Budget Committee · ATF</p>
+            <p class="font-semibold text-[0.95rem] text-zinc-800 mb-5">Where Each Party Directs Policy Energy</p>
+            <div class="space-y-2 mb-4">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-[#3E7FCC] mb-1.5">🔵 Democratic priority investments</p>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-[#4DA3FF] shrink-0"></span>Healthcare access — ACA expanded coverage to 20M+
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-[#4DA3FF] shrink-0"></span>Infrastructure — $1.2T bipartisan bill (2021)
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-[#4DA3FF] shrink-0"></span>Education &amp; Pell Grants — workforce development
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#4DA3FF] shrink-0"></span>Small business formation — highest under Dem presidents
+              </div>
+            </div>
+            <div class="space-y-2 mt-5">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-red-400 mb-1.5">🔴 Republican priority policy actions</p>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>Corporate tax cut: 35% → 21% (TCJA 2017)
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>Top marginal rate reduced each major GOP admin
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5 border-b border-black/5">
+                <span class="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>Medicaid &amp; SNAP cuts proposed to fund tax cuts
+              </div>
+              <div class="flex items-center gap-2.5 text-sm text-zinc-600 py-1.5">
+                <span class="w-2 h-2 rounded-full bg-red-400 shrink-0"></span>Estate tax reduced — largest benefit to top 0.1%
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Three era cards: Textbook upward transfers -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm mb-6">
+          <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Historical Pattern · Princeton / JEC / ATF</p>
+          <p class="font-semibold text-[0.95rem] text-zinc-800 mb-5">The Three "Textbook" Upward Wealth Transfers (Modern Era)</p>
+          <div class="grid md:grid-cols-3 gap-4">
+            <div class="rounded-xl border border-red-100 bg-red-50 p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="rounded-lg bg-red-100 px-2 py-0.5 text-[9px] uppercase tracking-[0.14em] text-red-600 font-semibold">Reagan · 1981</span>
+              </div>
+              <p class="font-semibold text-zinc-800 text-sm mb-2">ERTA Tax Cuts</p>
+              <p class="text-xs leading-5 text-zinc-600">Top marginal income tax rate cut from <strong>70% → 50%</strong> in 1981, then to <strong>28%</strong> by 1988. Capital gains and estate tax also cut. Deficit grew while social programs were trimmed. Launched the modern era of top-heavy Republican tax policy.</p>
+            </div>
+            <div class="rounded-xl border border-red-100 bg-red-50 p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="rounded-lg bg-red-100 px-2 py-0.5 text-[9px] uppercase tracking-[0.14em] text-red-600 font-semibold">Bush II · 2001/2003</span>
+              </div>
+              <p class="font-semibold text-zinc-800 text-sm mb-2">EGTRRA + JGTRRA Cuts</p>
+              <p class="text-xs leading-5 text-zinc-600">Two rounds of tax cuts totaling roughly <strong>$1.7 trillion</strong> over 10 years. Reduced top rates, dividends, and capital gains taxes. Passed during a surplus — which quickly became the largest deficit in history. The cuts primarily benefited the top quintile.</p>
+            </div>
+            <div class="rounded-xl border border-red-100 bg-red-50 p-5">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="rounded-lg bg-red-100 px-2 py-0.5 text-[9px] uppercase tracking-[0.14em] text-red-600 font-semibold">Trump · 2017</span>
+              </div>
+              <p class="font-semibold text-zinc-800 text-sm mb-2">Tax Cuts &amp; Jobs Act</p>
+              <p class="text-xs leading-5 text-zinc-600">Corporate rate cut from <strong>35% → 21%</strong>. Added <strong>$1.9 trillion</strong> to the deficit. Billionaires grew <strong>$2.2T richer (+77%)</strong> in 6 years. Middle-class provisions set to expire in 2025 — corporate and wealthy provisions are permanent. Now proposed for $4.6T extension.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- The moderation nuance -->
+        <div class="reveal grid md:grid-cols-2 gap-6 mb-6">
+          <div class="rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.05] p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-[#3E7FCC] mb-3">What Democrats Do (and Don't Do)</p>
+            <p class="font-semibold text-zinc-800 text-sm mb-3">They moderate inequality — they don't eliminate it</p>
+            <p class="text-sm leading-6 text-zinc-600">Global forces (technology, globalization) push wealth to the top regardless of who's in office. Clinton's era saw rising inequality partly due to the stock market boom. Obama's years saw continued rise driven by global capital dynamics. But Democratic administrations consistently produced <strong class="text-zinc-800">faster GDP growth, more job creation, and smaller post-tax income gaps</strong> than their Republican counterparts — even if they didn't fully close the divide.</p>
+          </div>
+          <div class="rounded-2xl border border-amber-200 bg-amber-50 p-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-amber-600 mb-3">The Budget Math That Doesn't Add Up</p>
+            <p class="font-semibold text-zinc-800 text-sm mb-3">Tax cuts for the top + cuts to programs for the rest</p>
+            <p class="text-sm leading-6 text-zinc-600">Republican budget proposals in 2025 call for cutting <strong class="text-zinc-800">Medicaid, SNAP (food stamps), and other low-income supports</strong> in order to finance or extend the top-heavy tax cuts. This is the mechanism of upward wealth transfer: reduce taxes on gains and estates at the top; reduce the safety net for everyone else. The Center for Progressive Reform calls it "the biggest upward wealth transfer in history."</p>
+          </div>
+        </div>
+
+        <!-- Dark conclusion -->
+        <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-8 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+          <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+          <div class="relative z-10">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-4">Summary · JEC · Blinder &amp; Watson · ATF · Progressive Reform</p>
+            <h3 class="font-display text-[2rem] md:text-[2.4rem] uppercase leading-none text-white mb-6">The Pattern in Plain Terms</h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.16em] text-[#4DA3FF]/60 mb-3">Democratic administrations tend to…</p>
+                <ul class="space-y-2 text-sm text-white/60">
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>Grow the overall economy faster (4.33% vs 2.54% GDP avg)</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>Generate more jobs with broader access to middle-class income</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>Invest in healthcare, education, and infrastructure</li>
+                  <li class="flex items-start gap-2"><span class="text-[#4DA3FF] mt-0.5">→</span>Moderate — but not eliminate — the inequality driven by global forces</li>
+                </ul>
+              </div>
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.16em] text-red-400/60 mb-3">Modern Republican administrations tend to…</p>
+                <ul class="space-y-2 text-sm text-white/60">
+                  <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">→</span>Pass large top-heavy tax cuts that increase after-tax inequality</li>
+                  <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">→</span>Preside over slower growth and more frequent recessions</li>
+                  <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">→</span>Propose cuts to Medicaid, SNAP, and social programs to fund the cuts</li>
+                  <li class="flex items-start gap-2"><span class="text-red-400 mt-0.5">→</span>Accelerate wealth concentration: billionaires +$2.2T under TCJA alone</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
     <!-- ─── BUSINESS CLOSURES ─── -->
     <section id="business-closures" class="relative overflow-hidden bg-[#F5F5F2] px-6 py-14">
       <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-[0.18]"></div>
@@ -2496,7 +2681,79 @@
     }
   });
 
-  // ── 17. Deportation quality: criminal vs non-criminal ────────────────────
+  // ── 17. Billionaire wealth before/after TCJA ─────────────────────────────
+  new Chart(document.getElementById('billionaireWealthChart'), {
+    type: 'bar',
+    data: {
+      labels: ['2017\nBefore TCJA', '2023\nAfter TCJA'],
+      datasets: [{
+        label: 'Billionaire Collective Net Worth ($ Trillions)',
+        data: [2.86, 5.06],
+        backgroundColor: ['rgba(100,116,139,0.6)', 'rgba(239,68,68,0.75)'],
+        borderColor: ['rgba(100,116,139,0.9)', 'rgba(239,68,68,1)'],
+        borderWidth: 1,
+        borderRadius: 10,
+        borderSkipped: false
+      }]
+    },
+    options: {
+      ...baseOpts,
+      layout: { padding: { bottom: 10, top: 8 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `$${ctx.raw.toFixed(2)} Trillion` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 0, max: 6,
+          ticks: { font: { family: 'Inter', size: 10 }, callback: v => `$${v}T` },
+          title: { display: true, text: 'Collective Net Worth ($ Trillions)', font: { family: 'Inter', size: 10 } }
+        }
+      }
+    }
+  });
+
+  // ── 18. GOP tax cut deficit costs ─────────────────────────────────────────
+  new Chart(document.getElementById('gopTaxCostChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Reagan ERTA\n(1981)', 'Bush II Cuts\n(2001 + 2003)', 'Trump TCJA\n(2017)', 'TCJA Extension\n(Proposed 2025)'],
+      datasets: [{
+        label: 'Added to Deficit ($ Trillions, 10-yr estimate)',
+        data: [0.75, 1.7, 1.9, 4.6],
+        backgroundColor: [
+          'rgba(239,68,68,0.5)',
+          'rgba(239,68,68,0.65)',
+          'rgba(239,68,68,0.8)',
+          'rgba(239,68,68,0.95)'
+        ],
+        borderColor: 'rgba(239,68,68,1)',
+        borderWidth: 1,
+        borderRadius: 6
+      }]
+    },
+    options: {
+      ...baseOpts,
+      layout: { padding: { bottom: 12 } },
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => `$${ctx.raw}T added to deficit` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 9 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 0, max: 5.5,
+          ticks: { font: { family: 'Inter', size: 10 }, callback: v => `$${v}T` },
+          title: { display: true, text: 'Deficit Cost ($ Trillions)', font: { family: 'Inter', size: 10 } }
+        }
+      }
+    }
+  });
+
+  // ── 19. Deportation quality: criminal vs non-criminal ─────────────────────
   new Chart(document.getElementById('deportationQualityChart'), {
     type: 'bar',
     data: {
