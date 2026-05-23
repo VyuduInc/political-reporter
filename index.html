@@ -127,6 +127,9 @@
         <li><a href="#housing-crisis" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Homeownership
         </a></li>
+        <li><a href="#fun-money" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Fun Years &amp; Lifestyle
+        </a></li>
         <li><a href="#business-closures" class="nav-link group flex items-center gap-3 px-3 py-2.5 rounded-xl text-white/60 text-[0.82rem] hover:text-white hover:bg-white/[0.07] transition-all">
           <span class="w-1.5 h-1.5 rounded-full bg-[#4DA3FF]/40 group-hover:bg-[#4DA3FF] transition-colors shrink-0"></span>Business Closures
         </a></li>
@@ -783,6 +786,86 @@
           </div>
         </div>
 
+        <!-- ── Deportation Quality: Who Was Actually Being Deported? ── -->
+        <div class="mt-10 pt-10 border-t border-white/[0.06]">
+          <p class="text-[9px] uppercase tracking-[0.2em] text-white/30 mb-2">Enforcement Quality — DHS / ICE Data</p>
+          <h3 class="font-display text-[2rem] md:text-[2.6rem] uppercase leading-none text-white mb-4 reveal">Who Was Actually<br>Being Deported?</h3>
+          <p class="text-sm leading-6 text-white/50 mb-8 max-w-3xl reveal">The real question isn't just <em class="text-white/70">how many</em> people were deported — it's <em class="text-white/70">who</em>. Obama concentrated removals on criminals. Trump's policy removed everyone regardless of criminal history. Official DHS data tells a stark story.</p>
+
+          <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8 reveal">
+            <div class="rounded-xl bg-white/[0.05] border border-[#4DA3FF]/20 p-5">
+              <p class="text-[8px] uppercase tracking-[0.16em] text-[#4DA3FF]/60 mb-2">Obama — Peak Year (2016)</p>
+              <p class="font-display text-[2.8rem] leading-none text-[#4DA3FF]">94%</p>
+              <p class="text-[10px] text-white/40 mt-1">Deportees with criminal convictions</p>
+            </div>
+            <div class="rounded-xl bg-white/[0.05] border border-[#4DA3FF]/20 p-5">
+              <p class="text-[8px] uppercase tracking-[0.16em] text-[#4DA3FF]/60 mb-2">Obama — Interior Avg</p>
+              <p class="font-display text-[2.8rem] leading-none text-[#4DA3FF]">~90%</p>
+              <p class="text-[10px] text-white/40 mt-1">Criminal records — interior removals</p>
+            </div>
+            <div class="rounded-xl bg-white/[0.05] border border-red-400/20 p-5">
+              <p class="text-[8px] uppercase tracking-[0.16em] text-red-400/60 mb-2">Trump T1 — with convictions</p>
+              <p class="font-display text-[2.8rem] leading-none text-red-400">29%</p>
+              <p class="text-[10px] text-white/40 mt-1">Only 29% had any criminal conviction</p>
+            </div>
+            <div class="rounded-xl bg-white/[0.05] border border-red-400/20 p-5">
+              <p class="text-[8px] uppercase tracking-[0.16em] text-red-400/60 mb-2">Trump T1 — no criminal record</p>
+              <p class="font-display text-[2.8rem] leading-none text-red-400">~71%</p>
+              <p class="text-[10px] text-white/40 mt-1">Majority deported had no convictions</p>
+            </div>
+          </div>
+
+          <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6 mb-6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-1">DHS / ICE · Bipartisan Policy Center · Washington Monthly · factchequeado.com</p>
+            <p class="text-sm font-semibold text-white/70 mb-4">Deportees with Criminal Convictions vs No Criminal Record</p>
+            <div class="chart-container" style="height:220px">
+              <canvas id="deportationQualityChart"></canvas>
+            </div>
+            <div class="mt-5 pt-4 border-t border-white/[0.06]">
+              <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-2">What this shows</p>
+              <p class="text-sm leading-6 text-white/50">Under Obama's priority enforcement, roughly <strong class="text-white/70">90% of interior deportees had criminal records</strong> — primarily violent offenders, gang members, and convicted felons. By 2016, that share peaked at 94% in the highest-priority categories. Trump rescinded the prioritization memo and declared any removable person a target. The result: under Trump, roughly <strong class="text-white/70">71% of deportees had no criminal conviction at all</strong>. The "bad hombres" messaging masked a policy that mostly removed working people with clean records.</p>
+            </div>
+          </div>
+
+          <!-- Comparison table -->
+          <div class="reveal rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
+            <p class="text-sm font-semibold text-white/70 mb-4">Side-by-Side: Enforcement Priority Comparison</p>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-white/[0.08]">
+                    <th class="text-left py-2.5 pr-6 text-[9px] uppercase tracking-[0.14em] text-white/30 font-medium w-2/5">Metric</th>
+                    <th class="text-left py-2.5 pr-6 text-[9px] uppercase tracking-[0.14em] text-[#4DA3FF]/70 font-medium">Obama (priority enforcement)</th>
+                    <th class="text-left py-2.5 text-[9px] uppercase tracking-[0.14em] text-red-400/70 font-medium">Trump T1 (no priorities)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-white/[0.05]">
+                  <tr>
+                    <td class="py-3 pr-6 text-white/40">Share of deportees w/ criminal conviction</td>
+                    <td class="py-3 pr-6 font-semibold text-[#4DA3FF]">60–94% (rising each year)</td>
+                    <td class="py-3 font-semibold text-red-400">~29% (majority had no record)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-6 text-white/40">Priority policy</td>
+                    <td class="py-3 pr-6 text-white/50">Felons, gang members, national security threats first</td>
+                    <td class="py-3 text-white/50">All undocumented persons equally targeted</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-6 text-white/40">Non-criminal deportees</td>
+                    <td class="py-3 pr-6 text-white/50">Small minority — ~10% of interior removals</td>
+                    <td class="py-3 font-semibold text-red-400">Majority — ~50–71% of deportees</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-6 text-white/40">Who was targeted</td>
+                    <td class="py-3 pr-6 text-[#4DA3FF]">Criminals, terrorists, repeat violators</td>
+                    <td class="py-3 text-red-400">Anyone without documentation — workers, parents, long-term residents</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -1127,6 +1210,145 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── FUN YEARS & LIFESTYLE ─── -->
+    <section id="fun-money" class="relative overflow-hidden bg-zinc-50 px-6 py-14">
+      <div class="pointer-events-none absolute inset-0 bg-grid-pattern opacity-40"></div>
+      <div class="relative max-w-5xl mx-auto">
+
+        <div class="flex items-center gap-2 mb-8">
+          <span class="h-px flex-1 bg-black/8 max-w-[2rem]"></span>
+          <span class="text-[9px] uppercase tracking-[0.2em] text-zinc-400">10 · Prosperity &amp; Lifestyle</span>
+        </div>
+
+        <h2 class="font-display text-[2.8rem] md:text-[3.6rem] uppercase leading-[0.92] text-[#0A0A0A] mb-4 reveal">The Fun Years:<br>Who Puts More Money<br>in Your Pocket?</h2>
+        <p class="text-[1rem] leading-7 text-zinc-500 mb-10 max-w-3xl reveal">Which party's years are more economically expansionary for everyday Americans — and what do people across the political spectrum actually do with their leisure time? The data answers both questions clearly.</p>
+
+        <!-- 3 hero stats -->
+        <div class="grid md:grid-cols-3 gap-4 mb-10">
+          <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-6 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+            <div class="absolute inset-0 bg-grid-pattern-dark opacity-100"></div>
+            <div class="relative z-10">
+              <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-3">Dem Presidents · GDP Avg (WWII–2022)</p>
+              <p class="font-display text-[3.2rem] leading-none tracking-wide text-white">4.33%</p>
+              <p class="text-[11px] text-[#4DA3FF] mt-1">Blinder &amp; Watson, American Economic Review</p>
+              <div class="absolute top-5 right-5">
+                <span class="relative flex h-2 w-2">
+                  <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#4DA3FF]/50"></span>
+                  <span class="relative inline-flex h-2 w-2 rounded-full bg-[#4DA3FF]"></span>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-zinc-400 mb-3">Rep Presidents · GDP Avg (WWII–2022)</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-[#0A0A0A]">2.54%</p>
+            <p class="text-[11px] text-zinc-500 mt-1">Blinder &amp; Watson, same study period</p>
+          </div>
+          <div class="reveal rounded-2xl border border-[#4DA3FF]/20 bg-[#4DA3FF]/[0.06] p-6 shadow-[0_12px_28px_rgba(77,163,255,0.08)]">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-[#3E7FCC] mb-3">Growth Advantage</p>
+            <p class="font-display text-[3.2rem] leading-none tracking-wide text-[#10141B]">+70%</p>
+            <p class="text-[11px] text-[#3E7FCC] mt-1">Faster real GDP growth under Democrats</p>
+          </div>
+        </div>
+
+        <!-- GDP growth comparison chart -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm mb-6">
+          <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Blinder &amp; Watson (2016) · Wisconsin Democrats Long-Run Compilation</p>
+          <p class="font-semibold text-[0.95rem] text-zinc-800 mb-4">Avg Annual Real GDP Growth: Democrats vs Republicans</p>
+          <div class="chart-container" style="height:240px">
+            <canvas id="funGDPChart"></canvas>
+          </div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600">Two independent long-run analyses of post-WWII economic performance show the same result: the U.S. economy grows significantly faster under Democratic presidents. The Blinder &amp; Watson study — one of the most rigorous in the field — found the gap is not explained by luck or oil prices alone. Faster GDP growth means more jobs, higher incomes, and more money available for everyday spending and leisure — the "fun money" effect.</p>
+          </div>
+        </div>
+
+        <!-- Two column: What this means + JEC callout -->
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">Joint Economic Committee · 2024 Review</p>
+            <p class="font-semibold text-[0.95rem] text-zinc-800 mb-5">In "Almost Every Measure" — Democrats Win</p>
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-[#4DA3FF]/[0.06] border border-[#4DA3FF]/15">
+                <span class="text-[#4DA3FF] text-sm font-semibold shrink-0">GDP</span>
+                <span class="text-sm text-zinc-600">Grows faster under Democratic presidents in the modern era</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-[#4DA3FF]/[0.06] border border-[#4DA3FF]/15">
+                <span class="text-[#4DA3FF] text-sm font-semibold shrink-0">Jobs</span>
+                <span class="text-sm text-zinc-600">Higher job growth — 72% of all post-WWII jobs added under Dems</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-[#4DA3FF]/[0.06] border border-[#4DA3FF]/15">
+                <span class="text-[#4DA3FF] text-sm font-semibold shrink-0">Unemployment</span>
+                <span class="text-sm text-zinc-600">Lower average unemployment — 5.2% Dem vs 5.8% Rep</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-[#4DA3FF]/[0.06] border border-[#4DA3FF]/15">
+                <span class="text-[#4DA3FF] text-sm font-semibold shrink-0">Small Biz</span>
+                <span class="text-sm text-zinc-600">More small-business formation under Democratic presidents</span>
+              </div>
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-[#4DA3FF]/[0.06] border border-[#4DA3FF]/15">
+                <span class="text-[#4DA3FF] text-sm font-semibold shrink-0">Recessions</span>
+                <span class="text-sm text-zinc-600">Republicans preside over more frequent and longer recessions</span>
+              </div>
+            </div>
+          </div>
+          <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-4">UF / Florida Study · Onlinelibrary.wiley.com · 2024</p>
+            <p class="font-semibold text-[0.95rem] text-zinc-800 mb-4">Consumer Mood Tracks Who's in Power</p>
+            <p class="text-sm leading-6 text-zinc-600 mb-4">A 2024 Florida study found that when a voter's preferred party wins the presidency, their consumer sentiment jumps and they're significantly more willing to make large purchases — cars, appliances, vacations. When their party loses, they hold off on spending, even if the actual economy is unchanged.</p>
+            <div class="rounded-xl bg-zinc-50 border border-black/8 p-4 mb-3">
+              <p class="text-[9px] uppercase tracking-[0.14em] text-zinc-400 mb-1">Bottom line on partisan spending mood</p>
+              <p class="text-sm text-zinc-700 leading-6">Republicans feel better and spend more freely under Republican presidents. Democrats feel better under Democratic presidents. But the <strong>objective economic conditions</strong> — income growth, job availability, disposable income — are <strong>consistently stronger under Democratic administrations</strong>, giving everyone more actual capacity to spend.</p>
+            </div>
+            <p class="text-xs text-zinc-400 leading-5">Sources: UMich Consumer Sentiment, Statista partisan sentiment breakdowns, Wiley/ECIN 2024 study</p>
+          </div>
+        </div>
+
+        <!-- Pew recreation chart + explanation -->
+        <div class="reveal rounded-2xl border border-black/10 bg-white/80 p-6 shadow-[0_12px_28px_rgba(10,10,10,0.06)] backdrop-blur-sm mb-6">
+          <div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+            <div>
+              <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-1">Pew Research Center · 2021 Open-Ended Survey</p>
+              <p class="font-semibold text-[0.95rem] text-zinc-800">What Gives Life Meaning: Democrats vs Republicans</p>
+            </div>
+            <div class="flex items-center gap-4 text-[10px] text-zinc-500">
+              <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-2 rounded bg-[rgba(77,163,255,0.85)]"></span>Democrats</span>
+              <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-2 rounded bg-[rgba(239,68,68,0.8)]"></span>Republicans</span>
+            </div>
+          </div>
+          <div class="chart-container" style="height:360px">
+            <canvas id="recreationPewChart"></canvas>
+          </div>
+          <div class="mt-5 pt-5 border-t border-black/6">
+            <p class="text-[9px] uppercase tracking-[0.16em] text-zinc-400 mb-2">What this shows</p>
+            <p class="text-sm leading-6 text-zinc-600 mb-3">Pew Research asked Americans open-ended questions about what gives their life meaning and coded the responses. Both parties rank <strong class="text-zinc-800">family first</strong> (roughly equal). After that, clear differences emerge: Republicans are roughly <strong class="text-zinc-800">twice as likely</strong> to mention faith, religion, and God — which for many includes church-based social events, Bible study, and community worship as their primary recreation. Democrats are significantly more likely to mention <strong class="text-zinc-800">nature and outdoors, hobbies, reading, health and exercise, and pets</strong> as meaningful parts of their lives.</p>
+            <p class="text-sm leading-6 text-zinc-600">Neither is better or worse — they're genuinely different approaches to how people spend their time and find joy. But the data makes clear that "recreation" looks different depending on which side of the aisle you're on.</p>
+            <p class="text-[10px] text-zinc-400 mt-2 italic">Note: percentages are approximate relative proportions based on Pew open-ended response coding. Exact figures vary by question framing and subset.</p>
+          </div>
+        </div>
+
+        <!-- Conclusion callout -->
+        <div class="reveal rounded-2xl border border-black/10 bg-[#10141B] p-8 shadow-[0_16px_40px_rgba(10,10,10,0.15)] relative overflow-hidden">
+          <div class="absolute inset-0 bg-grid-pattern-dark"></div>
+          <div class="relative z-10">
+            <p class="text-[9px] uppercase tracking-[0.18em] text-white/40 mb-4">Bottom Line · Blinder &amp; Watson · JEC · Pew Research</p>
+            <h3 class="font-display text-[2rem] md:text-[2.4rem] uppercase leading-none text-white mb-6">In Which Party's Years<br>Is There More Money<br><span class="text-[#4DA3FF]">Sloshing Around?</span></h3>
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.16em] text-[#4DA3FF]/60 mb-3">The Economic Answer</p>
+                <p class="text-sm leading-6 text-white/60">If you measure by GDP growth, job creation, income expansion, lower unemployment, and fewer recessions — Democratic-led years are <strong class="text-white/90">more economically expansionary and "fun"</strong> by every objective measure. More Americans have jobs, earn more, and have more to spend. That's the data, not the spin.</p>
+              </div>
+              <div>
+                <p class="text-[9px] uppercase tracking-[0.16em] text-white/30 mb-3">The Lifestyle Answer</p>
+                <p class="text-sm leading-6 text-white/60">On what "fun" looks like culturally: Republicans concentrate meaning in faith, church, and patriotism. Democrats concentrate it in outdoor experiences, hobbies, reading, and pets. Both are valid. But when it comes to who has more <em>capacity</em> to enjoy leisure — the income and job data points clearly toward Democratic economic years as more prosperous for the average American.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -2274,7 +2496,155 @@
     }
   });
 
-  // ── 17. Homeownership rate by presidential era ───────────────────────────
+  // ── 17. Deportation quality: criminal vs non-criminal ────────────────────
+  new Chart(document.getElementById('deportationQualityChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Obama\n(interior avg)', 'Obama\n(2016 peak)', 'Trump T1\n(DHS data)'],
+      datasets: [
+        {
+          label: 'Had Criminal Conviction (%)',
+          data: [90, 94, 29],
+          backgroundColor: 'rgba(77,163,255,0.7)',
+          borderColor: 'rgba(77,163,255,1)',
+          borderWidth: 1,
+          borderRadius: 6
+        },
+        {
+          label: 'No Criminal Record (%)',
+          data: [10, 6, 71],
+          backgroundColor: 'rgba(239,68,68,0.65)',
+          borderColor: 'rgba(239,68,68,0.9)',
+          borderWidth: 1,
+          borderRadius: 6
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      layout: { padding: { bottom: 10 } },
+      plugins: {
+        legend: { position: 'top', labels: { color: 'rgba(255,255,255,0.6)', font: { family: 'Inter', size: 11 }, boxWidth: 20, boxHeight: 10 } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw}%` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: 'rgba(255,255,255,0.5)', font: { family: 'Inter', size: 10 } } },
+        y: {
+          grid: { color: 'rgba(255,255,255,0.04)' },
+          min: 0, max: 100,
+          ticks: { color: 'rgba(255,255,255,0.4)', font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
+          title: { display: true, text: '% of All Deportees', color: 'rgba(255,255,255,0.3)', font: { family: 'Inter', size: 10 } }
+        }
+      }
+    }
+  });
+
+  // ── 18. Fun Money GDP comparison ─────────────────────────────────────────
+  new Chart(document.getElementById('funGDPChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Blinder & Watson\n(WWII–2022)', 'Long-Run Avg\n(40 yrs each)'],
+      datasets: [
+        {
+          label: 'Democratic Presidents',
+          data: [4.33, 3.5],
+          backgroundColor: DEM_COLOR,
+          borderColor: DEM_BORDER,
+          borderWidth: 1,
+          borderRadius: 8
+        },
+        {
+          label: 'Republican Presidents',
+          data: [2.54, 2.4],
+          backgroundColor: REP_COLOR,
+          borderColor: REP_BORDER,
+          borderWidth: 1,
+          borderRadius: 8
+        }
+      ]
+    },
+    options: {
+      ...baseOpts,
+      layout: { padding: { bottom: 10 } },
+      plugins: {
+        legend: { position: 'top', labels: { font: { family: 'Inter', size: 11 }, boxWidth: 20, padding: 14 } },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.raw}%` } }
+      },
+      scales: {
+        x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          min: 0, max: 5.5,
+          ticks: { font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
+          title: { display: true, text: 'Avg Annual Real GDP Growth (%)', font: { family: 'Inter', size: 10 } }
+        }
+      }
+    }
+  });
+
+  // ── 19. Pew recreation / sources of meaning by party ─────────────────────
+  (function() {
+    const pewLabels = [
+      'Faith / Religion',
+      'Family',
+      'Freedom / Country',
+      'Health & Exercise',
+      'Nature & Outdoors',
+      'Hobbies & Recreation',
+      'Pets',
+      'Reading / Learning'
+    ];
+    new Chart(document.getElementById('recreationPewChart'), {
+      type: 'bar',
+      data: {
+        labels: pewLabels,
+        datasets: [
+          {
+            label: 'Democrats (%)',
+            data: [23, 54, 5, 15, 13, 11, 9, 9],
+            backgroundColor: DEM_COLOR,
+            borderColor: DEM_BORDER,
+            borderWidth: 1,
+            borderRadius: 5
+          },
+          {
+            label: 'Republicans (%)',
+            data: [46, 55, 18, 10, 7, 6, 5, 4],
+            backgroundColor: REP_COLOR,
+            borderColor: REP_BORDER,
+            borderWidth: 1,
+            borderRadius: 5
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { left: 8, right: 16, top: 4, bottom: 4 } },
+        plugins: {
+          legend: { position: 'top', labels: { font: { family: 'Inter', size: 11 }, boxWidth: 20, padding: 14 } },
+          tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ~${ctx.raw}%` } }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(0,0,0,0.04)' },
+            max: 60,
+            ticks: { font: { family: 'Inter', size: 10 }, callback: v => `${v}%` },
+            title: { display: true, text: '% who mentioned this as a source of meaning (Pew 2021, approx)', font: { family: 'Inter', size: 10 } }
+          },
+          y: {
+            grid: { display: false },
+            ticks: { font: { family: 'Inter', size: 10 } },
+            afterFit: (axis) => { axis.width = Math.max(axis.width, 160); }
+          }
+        }
+      }
+    });
+  })();
+
+  // ── 20. Homeownership rate by presidential era ───────────────────────────
   (function() {
     const N = null;
     const hoLabels = ['1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
